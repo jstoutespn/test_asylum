@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.IList;
+			import mx.events.FlexEvent;
+			
+			[Bindable] public var dataProvider:IList;
+			
+			override protected function commitProperties():void {
+				if (dataProvider != null && dataProvider.length > 0) {
+					visible = true;
+					includeInLayout = true;
+					invalidateDisplayList();
+				} else {
+					visible = false;
+					includeInLayout = false;
+					invalidateDisplayList();
+				}
+				super.commitProperties();
+			}			
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingRight="10" paddingLeft="10" paddingBottom="10" gap="10">
+		<s:SkinnableDataContainer id="containerContent" width="100%" height="100%" maxHeight="137" itemRenderer="com.asylum.view.map.MiniatureItem"
+								  dataProvider="{dataProvider}">
+			<s:layout>
+				<s:HorizontalLayout />
+			</s:layout>
+		</s:SkinnableDataContainer>
+	</s:VGroup>
+</s:Group>

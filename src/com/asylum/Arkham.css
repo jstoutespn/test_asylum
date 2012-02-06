@@ -1,0 +1,28 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face {
+	src: url("/assets/fonts/AGaramondPro-Regular.otf");
+	fontFamily:Garamond;
+	fontStyle:normal;
+	fontWeight:normal;
+}
+@font-face {
+	src: url("/assets/fonts/AGaramondPro-Bold.otf");
+	fontFamily:Garamond;
+	fontStyle:normal;
+	fontWeight:bold;
+}
+@font-face {
+	src: url("/assets/fonts/AGaramondPro-Italic.otf");
+	fontFamily:Garamond;
+	fontStyle:italic;
+	fontWeight:normal;
+}
+@font-face {
+	src: url("/assets/fonts/AGaramondPro-BoldItalic.otf");
+	fontFamily:Garamond;
+	fontStyle:italic;
+	fontWeight:bold;
+}

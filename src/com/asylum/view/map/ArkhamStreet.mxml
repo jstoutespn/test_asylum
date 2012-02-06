@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:map="com.asylum.view.map.*"
+		 implements="com.asylum.view.map.ILocation"
+		 minWidth="300" minHeight="56"
+		 initialize="onInit(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.CollectionEvent;
+			import mx.events.FlexEvent;
+			
+			public var streetId:String;
+			[Bindable] public var streetName:String;
+			[Bindable] public var streetColor:uint;
+			[Bindable] private var _chars:ArrayCollection;
+			[Bindable] private var _mons:ArrayCollection;
+			
+			public function get mapId():String
+			{
+				return streetId;
+			}
+			
+			public function get mapName():String
+			{
+				return streetName;
+			}
+
+			public function get characters():ArrayCollection
+			{
+				return _chars;
+			}
+			
+			public function set characters(value:ArrayCollection):void
+			{
+				_chars = value;
+			}
+			
+			public function get monsters():ArrayCollection
+			{
+				return _mons;
+			}
+
+			public function set monsters(value:ArrayCollection):void
+			{
+				_mons = value;
+			}
+			
+			private function onInit(event:FlexEvent):void
+			{
+				_chars = new ArrayCollection();
+				_mons = new ArrayCollection();
+				_chars.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+				_mons.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+			}
+						
+			private function onCollectionChange(event:CollectionEvent):void
+			{
+				charContainer.invalidateProperties();
+				monContainer.invalidateProperties();
+				invalidateDisplayList();
+			}
+			
+			override public function invalidateDisplayList():void
+			{
+				if (backFill && !backFill.visible && streetColor > 0) {
+					backFill.visible = true;
+				}
+				super.invalidateDisplayList();
+			}
+						
+		]]>
+	</fx:Script>
+	<s:Rect id="backFill" width="100%" height="100%" x="0" y="0" visible="false">
+		<s:stroke>
+			<s:SolidColorStroke color="#FFFFFF" weight="3" />
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="{streetColor}" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" gap="10">
+		<s:Label id="streetLabel" width="100%" fontFamily="Garamond" fontSize="36" text="{streetName}"/>
+		<map:MiniatureContainer id="charContainer" width="100%" dataProvider="{_chars}" />
+		<map:MiniatureContainer id="monContainer" width="100%" dataProvider="{_mons}" />
+	</s:VGroup>
+</s:Group>

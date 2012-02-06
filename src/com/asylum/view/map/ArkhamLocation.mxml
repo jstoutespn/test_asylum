@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:map="com.asylum.view.map.*"
+		 implements="com.asylum.view.map.ILocation"
+		 initialize="onInit(event)"
+		 creationComplete="onCreated(event)"
+		 dragEnter="onDragEnter(event)"
+		 dragDrop="onDrop(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.GateInstance;
+			import com.asylum.data.MonsterInstance;
+			import com.asylum.data.Player;
+			import com.asylum.data.enum.DragType;
+			import com.asylum.data.enum.NoteName;
+			import com.asylum.events.NoteEvent;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.CollectionEvent;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
+			
+			private var _locationId:String;
+			[Bindable] private var _locationName:String;
+			[Bindable] private var _chars:ArrayCollection;
+			[Bindable] private var _mons:ArrayCollection;
+			public var street:ArkhamStreet;
+			[Bindable] public var mapColor:uint;
+			[Bindable] public var clues:int;
+			public var canHazGate:Boolean;
+			public var hazGate:Boolean;
+			private var _isSealed:Boolean;
+			[Bindable] private var _gate:GateInstance;
+			[Bindable] public var label1:String;
+			[Bindable] public var label2:String;
+			public var specialAction:Object;
+			private var specialTextExpanded:Boolean;
+						
+			public function get mapId():String
+			{
+				return _locationId;
+			}
+			
+			public function set mapId(value:String):void {
+				_locationId = value;
+			}
+
+			public function get mapName():String
+			{
+				return _locationName;
+			}			
+			
+			public function set mapName(value:String):void {
+				_locationName = value;
+			}
+
+			public function get characters():ArrayCollection
+			{
+				return _chars;
+			}
+			
+			public function get monsters():ArrayCollection
+			{
+				return _mons;
+			}
+			
+			public function get gate():GateInstance 
+			{
+				return _gate;
+			}
+			
+			public function set gate(value:GateInstance):void 
+			{
+				if (canHazGate && !hazGate) {
+					_gate = value;
+				}
+			}
+
+			public function get isSealed():Boolean
+			{
+				return _isSealed;
+			}
+			
+			public function set isSealed(value:Boolean):void
+			{
+				_isSealed = value;
+				sealedLabel.visible = _isSealed;
+			}
+
+			
+			private function onInit(event:FlexEvent):void
+			{
+				_isSealed = false;
+				clues = 0;
+				specialTextExpanded = false;
+				_chars = new ArrayCollection();
+				_mons = new ArrayCollection();
+				_chars.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+				_mons.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+			}
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				if (specialAction != null) {
+					actionContainer.visible = true;
+					actionContainer.includeInLayout = true;
+					actionTitle.text = specialAction.title;
+					actionText.text = specialAction.text;
+				}
+				if (mapColor > 0) {
+					backFill.visible = true;
+				}
+				if (canHazGate) {
+					stableIconFill.color = 0xFF1800;
+				}
+			}
+
+			private function onDragEnter(event:DragEvent):void
+			{
+				var dragType:String = event.dragSource.dataForFormat('type') as String;
+				if (dragType == DragType.GATE && canHazGate && !hazGate && !_isSealed) {
+					DragManager.acceptDragDrop(this);
+				} else if (dragType == DragType.PLAYER) {
+					DragManager.acceptDragDrop(this);
+				} else if (dragType == DragType.MONSTER) {
+					DragManager.acceptDragDrop(this);
+				}
+			}
+			
+			private function onDrop(event:DragEvent):void
+			{
+				var dragType:String = event.dragSource.dataForFormat('type') as String;
+				if (dragType == DragType.GATE) {
+					var myGate:GateInstance = event.dragSource.dataForFormat('obj') as GateInstance;
+					dispatchEvent( new NoteEvent(NoteName.MOVE_GATE, {to:this, gate:myGate}) );
+				} else if (dragType == DragType.PLAYER) {
+					var myPlayer:Player = event.dragSource.dataForFormat('obj') as Player;
+					dispatchEvent( new NoteEvent(NoteName.MOVE_PLAYER, {to:this, player:myPlayer}) );
+				} else if (dragType == DragType.MONSTER) {
+					var myMonster:MonsterInstance = event.dragSource.dataForFormat('obj') as MonsterInstance;
+					dispatchEvent( new NoteEvent(NoteName.MOVE_MONSTER, {to:this, monster:myMonster}) );
+				}
+			}
+
+			private function onCollectionChange(event:CollectionEvent):void
+			{
+				charContainer.invalidateProperties();
+				monContainer.invalidateProperties();
+				invalidateDisplayList();
+			}
+			
+			private function onActionToggle(event:MouseEvent):void
+			{
+				if (specialTextExpanded) {
+					actionText.visible = false;
+					actionText.includeInLayout = false;
+					actionToggle.text = "[+]";
+					specialTextExpanded = false;
+				} else {
+					actionText.visible = true;
+					actionText.includeInLayout = true;
+					actionToggle.text = "[-]";
+					specialTextExpanded = true;
+				}
+			}
+			
+			private function onAddClue(event:MouseEvent):void
+			{
+				var newClue:int = this.clues + 1;
+				dispatchEvent(new NoteEvent(NoteName.SET_LOCATION_CLUES, {'clues':newClue, 'location':this}));
+			}
+			
+			private function onRemoveClue(event:MouseEvent):void
+			{
+				if (this.clues == 0) {
+					return;
+				}
+				var newClue:int = this.clues - 1;
+				dispatchEvent(new NoteEvent(NoteName.SET_LOCATION_CLUES, {'clues':newClue, 'location':this}));
+			}
+			
+			private function onClearClues(event:MouseEvent):void
+			{
+				if (this.clues == 0) {
+					return;
+				}
+				dispatchEvent(new NoteEvent(NoteName.SET_LOCATION_CLUES, {'clues':0, 'location':this}));
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect id="backFill" width="100%" height="100%" x="0" y="0" visible="false">
+		<s:stroke>
+			<s:SolidColorStroke color="#FFFFFF" weight="3" />
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="{mapColor}" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" gap="6">
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Rect id="stableIcon" width="10" height="10" rotation="315">
+				<s:fill>
+					<s:SolidColor id="stableIconFill" color="#24FF00" />
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" />
+				</s:stroke>
+			</s:Rect>
+			<s:Label id="sealedLabel" text="[sealed]" height="20" fontWeight="bold" verticalAlign="middle" visible="false" />
+		</s:HGroup>
+		<s:Label id="locationLabel" width="100%" fontFamily="Garamond" fontSize="24" text="{_locationName}"/>
+		<s:HGroup width="100%">
+			<s:Label text="Clues: " />
+			<s:Label id="clueLabel" width="100%" text="{clues}" />
+			<s:Label id="addClueBtn" click="onAddClue(event)" width="15" height="{clueLabel.height}" text="[+]" fontSize="10" verticalAlign="middle" textAlign="center" buttonMode="true" />
+			<s:Label id="removeClueBtn" click="onRemoveClue(event)" width="15" height="{clueLabel.height}" text="[-]" fontSize="10" verticalAlign="middle" textAlign="center" buttonMode="true" />
+			<s:Label id="clearCluesBtn" click="onClearClues(event)" width="30" height="{clueLabel.height}" text="[clear]" fontSize="10" verticalAlign="middle" textAlign="center" buttonMode="true" />
+		</s:HGroup>
+		<map:MiniatureContainer id="charContainer" width="100%" dataProvider="{_chars}" />
+		<map:MiniatureContainer id="monContainer" width="100%" dataProvider="{_mons}" />
+		<map:GateContainer id="gateContainer" width="100%" gate="{_gate}" />
+		<s:Group id="actionContainer" width="100%" visible="false" includeInLayout="false">
+			<s:Rect width="100%" height="100%" x="0" y="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" />
+				</s:stroke>
+			</s:Rect>
+			<s:VGroup id="actionDisplay" width="100%" height="100%" x="0" y="0" paddingTop="6" paddingLeft="6" paddingRight="6" paddingBottom="6">
+				<s:HGroup width="100%">
+					<s:Label id="actionTitle" width="100%" text="" fontWeight="bold" />
+					<s:Label id="actionToggle" width="20" textAlign="right" text="[+]" buttonMode="true" click="onActionToggle(event)" />
+				</s:HGroup>
+				<s:Label id="actionText" width="100%" visible="false" includeInLayout="false" text="" />
+			</s:VGroup>
+		</s:Group>
+		<s:HGroup width="100%">
+			<s:Label id="label1Label" text="{this.label1}" />
+			<s:Label text="|" />
+			<s:Label id="label2Label" text="{this.label2}" />
+		</s:HGroup>
+	</s:VGroup>
+</s:Group>

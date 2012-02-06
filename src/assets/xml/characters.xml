@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<characters>
+  <character id="0">
+    <name>Vincent Lee the Doctor</name>
+    <sanity>5</sanity>
+    <stamina>5</stamina>
+    <focus>2</focus>
+    <speed steps="0,1,2,3"/>
+    <sneak steps="5,4,3,2"/>
+    <fight steps="0,1,2,3"/>
+    <will steps="4,3,2,1"/>
+    <lore steps="2,3,4,5"/>
+    <luck steps="4,3,2,1"/>
+    <startpoint>hospital</startpoint>
+    <unique>
+		<name>Physician Upkeep</name>
+		<description><![CDATA[Upkeep: Dr. Lee may restore 1 Stamina to himself or another character in his location. He cannot raise a character's stamina higher than that character's maximum Stamina.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>9</cash>
+		<clue>1</clue>
+	  </fixed>
+      <random>
+        <commonItems num="2"/>
+        <spells num="2"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="1">
+    <name>Michael McGlen the Gangster</name>
+    <sanity>3</sanity>
+    <stamina>7</stamina>
+    <focus>1</focus>
+    <speed steps="2,3,4,5"/>
+    <sneak steps="4,3,2,1"/>
+    <fight steps="3,4,5,6"/>
+    <will steps="4,3,2,1"/>
+    <lore steps="0,1,2,3"/>
+    <luck steps="3,2,1,0"/>
+    <startpoint>boardhouse</startpoint>
+    <unique>
+		<name>Strong Body</name>
+		<description><![CDATA[Any Phase: Michael reduces all Stamina losses he suffers by 1, to a minimum of zero.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>4</cash>
+		<common id="dynamite" />
+		<common id="tommy gun" />
+	  </fixed>
+      <random>
+        <uniqueItems num="1"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="2">
+    <name>Amanda Sharpe the Student</name>
+    <sanity>5</sanity>
+    <stamina>5</stamina>
+    <focus>3</focus>
+    <speed steps="1,2,3,4"/>
+    <sneak steps="4,3,2,1"/>
+    <fight steps="1,2,3,4"/>
+    <will steps="4,3,2,1"/>
+    <lore steps="1,2,3,4"/>
+    <luck steps="4,3,2,1"/>
+    <startpoint>bank</startpoint>
+    <unique>
+		<name>Studious</name>
+		<description><![CDATA[Whenever Amanda draws one or more cards from the Skill deck, she draws one extra card and then discards one of the cards.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>1</cash>
+		<clue>1</clue>
+	  </fixed>
+      <random>
+        <commonItems num="1"/>
+        <uniqueItems num="1"/>
+        <spells num="1"/>
+        <skills num="2"/>
+      </random>
+    </gear>
+  </character>
+  <character id="3">
+    <name>Mandy Thompson the Researcher</name>
+    <sanity>5</sanity>
+    <stamina>5</stamina>
+    <focus>2</focus>
+    <speed steps="1,2,3,4"/>
+    <sneak steps="5,4,3,2"/>
+    <fight steps="0,1,2,3"/>
+    <will steps="5,4,3,2"/>
+    <lore steps="1,2,3,4"/>
+    <luck steps="3,2,1,0"/>
+    <startpoint>library</startpoint>
+    <unique>
+		<name>Research</name>
+		<description><![CDATA[Any Phase: Once per turn, Mandy can activate this ability after any investigator (including herself) makes a skill check. That investigator then re-rolls all of the dice rolled for that check that did not result in successes.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>6</cash>
+		<clue>4</clue>
+	  </fixed>
+      <random>
+        <commonItems num="2"/>
+        <uniqueItems num="1"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="4">
+    <name>Joe Diamond the Private Eye</name>
+    <sanity>4</sanity>
+    <stamina>6</stamina>
+    <focus>3</focus>
+    <speed steps="3,4,5,6"/>
+    <sneak steps="4,3,2,1"/>
+    <fight steps="2,3,4,5"/>
+    <will steps="3,2,1,0"/>
+    <lore steps="0,1,2,3"/>
+    <luck steps="3,2,1,0"/>
+    <startpoint>police</startpoint>
+    <unique>
+		<name>Hunches</name>
+		<description><![CDATA[Any Phase: Joe rolls one extra bonus die when he spends a Clue token to add to a roll.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>8</cash>
+		<clue>3</clue>
+		<common id=".45 Automatic" />
+	  </fixed>
+      <random>
+        <commonItems num="2"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="5">
+    <name>Sister Mary the Nun</name>
+    <sanity>7</sanity>
+    <stamina>3</stamina>
+    <focus>1</focus>
+    <speed steps="1,2,3,4"/>
+    <sneak steps="4,3,2,1"/>
+    <fight steps="0,1,2,3"/>
+    <will steps="4,3,2,1"/>
+    <lore steps="1,2,3,4"/>
+    <luck steps="6,5,4,3"/>
+    <startpoint>church</startpoint>
+    <unique>
+		<name>Guardian Angel</name>
+		<description><![CDATA[Any Phase: Sister Mary is never Lost in Time and Space. Instead, if her Sanity is 0, she returns to Arkham Asylum. If her Stamina is 0, she returns to St. Mary's Hospital. If neither her Sanity or her Stamina are 0, she returns to South Church.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<status id="blessing" />
+		<common id="Cross" />
+		<unique id="Holy Water" />
+	  </fixed>
+      <random>
+        <spells num="2"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="6">
+    <name>Darrell Simmons the Photographer</name>
+    <sanity>4</sanity>
+    <stamina>6</stamina>
+    <focus>2</focus>
+    <speed steps="2,3,4,5"/>
+    <sneak steps="3,2,1,0"/>
+    <fight steps="2,3,4,5"/>
+    <will steps="4,3,2,1"/>
+    <lore steps="0,1,2,3"/>
+    <luck steps="4,3,2,1"/>
+    <startpoint>newspaper</startpoint>
+    <unique>
+		<name>Hometown Advantage</name>
+		<description><![CDATA[Town Encounter: When drawing location encounters in Arkham, Darrell draws two cards and may choose whichever one of the two he wants. This ability does not work when drawing gate encounters in Other Worlds.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>4</cash>
+		<clue>1</clue>
+		<special id="Retainer" />
+	  </fixed>
+      <random>
+        <commonItems num="1"/>
+        <uniqueItems num="2"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="7">
+    <name>Dexter Drake the Magician</name>
+    <sanity>5</sanity>
+    <stamina>5</stamina>
+    <focus>2</focus>
+    <speed steps="2,3,4,5"/>
+    <sneak steps="4,3,2,1"/>
+    <fight steps="1,2,3,4"/>
+    <will steps="3,2,1,0"/>
+    <lore steps="2,3,4,5"/>
+    <luck steps="3,2,1,0"/>
+    <startpoint>magicshop</startpoint>
+    <unique>
+		<name>Magical Gift</name>
+		<description><![CDATA[Any Phase: Whenever "The Great" Drake draws one or more cards from the Spell deck, he draws one extra card and then discards one of the cards.]]></description>
+	</unique>
+    <gear>
+      <fixed>
+	  	<cash>5</cash>
+		<spell id="Shrivelling" />
+	  </fixed>
+      <random>
+        <commonItems num="1"/>
+        <uniqueItems num="1"/>
+        <spells num="2"/>
+        <skills num="1"/>
+      </random>
+    </gear>
+  </character>
+  <character id="8">
+  	<name>Kate Winthrop the Scientist</name>
+  	<sanity>6</sanity>
+  	<stamina>4</stamina>
+  	<focus>1</focus>
+  	<speed steps="1,2,3,4" />
+  	<sneak steps="5,4,3,2" />
+  	<fight steps="1,2,3,4" />
+  	<will steps="3,2,1,0" />
+  	<lore steps="2,3,4,5" />
+  	<luck steps="4,3,2,1" />
+  	<startpoint>science</startpoint>
+  	<unique>
+  		<name><![CDATA[Science!]]></name>
+  		<description><![CDATA[Any Phase: Gates and monsters cannot appear in Kate's location due to her flux stabilizer. Monsters and gates do not disappear if she enters their location, however, and monsters can move into her location as usual.]]></description>
+  	</unique>
+  	<gear>
+  		<fixed>
+  			<cash>7</cash>
+  			<clue>2</clue>
+  		</fixed>
+  		<random>
+	        <commonItems num="1"/>
+	        <uniqueItems num="1"/>
+	        <spells num="2"/>
+	        <skills num="1"/>
+  		</random>
+  	</gear>
+  </character>
+</characters>

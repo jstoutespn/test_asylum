@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:map="com.asylum.view.map.*"
+		 implements="com.asylum.view.map.ILocation"
+		 initialize="onInit(event)"
+		 >
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.CollectionEvent;
+			import mx.events.FlexEvent;
+			
+			private var _subId:String;
+			[Bindable] private var _subName:String;
+			[Bindable] private var _chars:ArrayCollection;
+			[Bindable] private var _mons:ArrayCollection;
+			public var master:ArkhamLocation;
+			[Bindable] public var mapColor:uint;
+			
+			public function get mapId():String
+			{
+				return _subId;
+			}
+			
+			public function set mapId(value:String):void 
+			{
+				_subId = value;
+			}
+			
+			public function get mapName():String
+			{
+				return _subName;
+			}
+			
+			public function set mapName(value:String):void
+			{
+				_subName = value;
+			}
+
+			public function get characters():ArrayCollection
+			{
+				return _chars;
+			}
+			
+			public function get monsters():ArrayCollection
+			{
+				return _mons;
+			}
+			
+			private function onInit(event:FlexEvent):void
+			{
+				_chars = new ArrayCollection();
+				_mons = new ArrayCollection();
+				_chars.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+				_mons.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
+			}
+			
+			private function onCollectionChange(event:CollectionEvent):void
+			{
+				charContainer.invalidateProperties();
+				monContainer.invalidateProperties();
+				invalidateDisplayList();
+			}
+		]]>
+	</fx:Script>
+	<s:Rect id="backFill" width="100%" height="100%" x="0" y="0" visible="false">
+		<s:stroke>
+			<s:SolidColorStroke color="#FFFFFF" weight="3" />
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="{mapColor}" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" gap="6">
+		<s:Label id="locationLabel" width="100%" fontFamily="Garamond" fontSize="24" text="{_locationName}"/>
+		<s:VGroup width="100%" gap="10">
+			<map:MiniatureContainer id="charContainer" width="100%" dataProvider="{_chars}" />
+			<map:MiniatureContainer id="monContainer" width="100%" dataProvider="{_mons}" />
+		</s:VGroup>
+	</s:VGroup>
+</s:Group>

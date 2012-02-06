@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:map="com.asylum.view.map.*" 
+		 width="2000" height="4000"
+		 creationComplete="onCreated(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Gate;
+			import com.asylum.data.GateInstance;
+			import com.asylum.data.enum.LocationActions;
+			import com.asylum.data.enum.Locations;
+			import com.asylum.data.enum.MonsterSymbol;
+			
+			import mx.events.FlexEvent;
+			import mx.graphics.SolidColorStroke;
+			
+			import spark.primitives.Line;
+			
+			public var streets:Array;
+			public var locations:Array;
+			public var worlds:Array;
+			public var mapIndex:Dictionary;
+			
+			public function get allItems():Array {
+				return streets.concat(locations.concat(worlds));
+			}
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				streets = [northside, merchant, miskatonic, uptown];
+				locations = [newspaper, trainStation, curiosityShop, unvisited, unnameable, riverDocks, science, admin, library, hospital, magicShop, woods];
+				worlds = [];
+				
+				for each (var loc:ArkhamLocation in locations) {
+					connectLocationToStreet(loc);
+				}
+				backGraphics.invalidateDisplayList();
+				
+				var gate:Gate = new Gate();
+				gate.world = Locations.RLEYH; gate.symbol = MonsterSymbol.CROSS; gate.modifier = -3;
+				var gateInst:GateInstance = new GateInstance(gate);
+				unvisited.gate = gateInst;
+			}
+			
+			private function connectLocationToStreet(loc:ArkhamLocation):void {
+				var pen:SolidColorStroke = new SolidColorStroke(0, 1.5, 1, true);
+				
+				var line:Line = new Line();
+				line.x = line.y = 0;
+				line.xFrom =  loc.x + (loc.width * 0.5);
+				line.yFrom = loc.y + (loc.height * 0.5);
+				line.xTo = loc.street.x + (loc.street.width * 0.5);
+				line.yTo = loc.street.y + (loc.street.height * 0.5);
+				line.stroke = pen;
+				backGraphics.addElement(line);
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Group id="backGraphics" width="1%" height="1%" x="0" y="0" ></s:Group>
+	<!-- arrows -->
+	<map:ArrowBlack x="471" y="390" height="380" />
+	<map:ArrowBlack x="603" y="769" height="561" />
+	<map:ArrowBlack x="633" y="1330" height="507" />
+	<!-- Northside -->
+	<map:ArkhamStreet id="northside" streetId="{Locations.NORTHSIDE}" x="349" y="390"
+					  streetColor="#FF9900" streetName="Northside"/>
+	<map:ArkhamLocation id="curiosityShop" x="59" y="418" width="200" canHazGate="false" label1="Unique"
+						label2="Common" mapColor="#FF9900" mapId="{Locations.CURIOSITY_SHOPPE}"
+						mapName="Curiositie Shoppe" street="{northside}" specialAction="{LocationActions.CURIOSITY_SHOPPE}"/>
+	<map:ArkhamLocation id="newspaper" mapId="{Locations.NEWSPAPER}" x="314" y="20" width="200" canHazGate="false" label1="Cash"
+						label2="Clue" mapColor="#FF9900" mapName="Newspaper" street="{northside}"/>
+	<map:ArkhamLocation id="trainStation" mapId="{Locations.TRAIN_STATION}" x="47" y="147" 
+						mapName="Train Station" mapColor="#FF9900" street="{this.northside}" width="200" canHazGate="false"
+						label1="Unique" label2="Common"/>
+	<!-- Merchant District -->
+	<map:ArkhamStreet id="merchant" streetId="{Locations.MERCHANT_DISTRICT}" x="349" y="769"
+					  streetColor="#00FF00" streetName="Merchant District"/>
+	<map:ArkhamLocation id="unvisited" mapId="{Locations.UNVISITED_ISLE}" x="65" y="690" width="200" canHazGate="true" label1="Clue"
+						label2="Spell" mapColor="#00FF00" mapName="Unvisited Isle" street="{merchant}"/>
+	<map:ArkhamLocation id="riverDocks" mapId="{Locations.RIVER_DOCKS}" x="26" y="997" width="200" canHazGate="false" label1="Cash"
+						label2="Common" mapColor="#00FF00" mapName="River Docks" street="{merchant}" specialAction="{LocationActions.RIVER_DOCKS}" />
+	<map:ArkhamLocation id="unnameable" mapId="{Locations.UNNAMEABLE}" x="349" y="1015" width="200" canHazGate="true" label1="Unique"
+						label2="Clue" mapColor="#00FF00" mapName="The Unnamable" street="{merchant}" />
+	<!-- University -->
+	<map:ArkhamStreet id="miskatonic" streetId="{Locations.MISKATONIC_UNIVERSITY}" x="426" y="1330"
+					  streetColor="#FFFF99" streetName="Miskatonic University"/>
+	<map:ArkhamLocation id="science" mapId="{Locations.SCIENCE_BUILDING}" x="27" y="1240" width="200" canHazGate="true" label1="Clue"
+						label2="Unique" mapColor="#FFFF99" mapName="Science Building" street="{miskatonic}" specialAction="{LocationActions.SCIENCE_BUILDING}"/>
+	<map:ArkhamLocation id="admin" mapId="{Locations.ADMIN_BUILDING}" x="349" y="1552" width="200" canHazGate="false" label1="Cash"
+						label2="Skill" mapColor="#FFFF99" mapName="Administration Building" street="{miskatonic}" specialAction="{LocationActions.ADMIN_BUILDING}"/>
+	<map:ArkhamLocation id="library" mapId="{Locations.LIBRARY}" x="89" y="1533" width="200" canHazGate="false" label1="Unique"
+						label2="Spell" mapColor="#FFFF99" mapName="Library" street="{miskatonic}" />
+	<!-- Uptown -->
+	<map:ArkhamStreet id="uptown" streetId="{Locations.UPTOWN}" x="470" y="1835"
+					  streetColor="#FF0000" streetName="Uptown"/>
+	<map:ArkhamLocation id="hospital" mapId="{Locations.ST_MARY_HOSPITAL}" x="134" y="1873" width="200" canHazGate="false" label1="Clue"
+						label2="Stamina" mapColor="#FF0000" mapName="St. Mary's Hospital" street="{uptown}" specialAction="{LocationActions.HOSPITAL}"/>
+	<map:ArkhamLocation id="magicShop" mapId="{Locations.MAGICK_SHOPPE}" x="411" y="2073" width="200" canHazGate="false" label1="Spell"
+						label2="Unique" mapColor="#FF0000" mapName="Ye Olde Magick Shoppe" street="{uptown}" specialAction="{LocationActions.MAGIC_SHOP}"/>
+	<map:ArkhamLocation id="woods" mapId="{Locations.WOODS}" x="662" y="2026" width="200" canHazGate="true" label1="Cash"
+						label2="Common" mapColor="#FF0000" mapName="Woods" street="{uptown}" />
+
+</s:Group>
