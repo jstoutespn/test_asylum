@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+	<abomUrl>assets/xml/abominations.xml</abomUrl>
 	<cardUrl>assets/xml/cards.xml</cardUrl>
 	<charUrl>assets/xml/characters.xml</charUrl>
 </config>
