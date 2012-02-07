@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<cardUrl>assets/xml/cards.xml</cardUrl>
+	<charUrl>assets/xml/characters.xml</charUrl>
+</config>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cards>
+	<gates>
+		<gate id="0" world="anotherdim" symbol="square" modifier="0" num="1" />
+		<gate id="1" world="celeano" symbol="hexagon" modifier="-1" num="1" />
+		<gate id="2" world="leng" symbol="diamond" modifier="-1" num="1" />
+	</gates>
+	<items>
+		<item id="1" type="common" num="2">
+			<name><![CDATA[.45 Automatic]]></name>
+			<subtype>Physical weapon</subtype>
+			<hands>1</hands>
+			<price>5</price>
+			<text><![CDATA[Bonus: +4 to Combat check]]></text>
+		</item>
+		<item id="2" type="common" num="2">
+			<name>Motorcycle</name>
+			<price>4</price>
+			<text><![CDATA[Movement: Exhaust to get two extra movement points. Cannot use in Other Worlds.]]></text>
+		</item>
+		<item id="3" type="unique" num="4">
+			<name><![CDATA[Elder Sign]]></name>
+			<price>5</price>
+			<text><![CDATA[Any Phase: When sealing a gate, lose 1 Stamina and 1 Sanity and return this card to the box. You do not need to make a skill check or spend any Clue tokens to seal the gate. In addition, remove one doom token from the Ancient One's doom track.]]></text>
+		</item>
+		<item id="4" type="unique" num="2">
+			<name><![CDATA[Cultes des Goules]]></name>
+			<subtype>Tome</subtype>
+			<price>3</price>
+			<text><![CDATA[Movement: Exhaust and spend 2 movement points to make a Lore (-2) check. If you pass, draw 1 Spell and gain 1 Clue token, but lose 2 Sanity and discard Cultes Des Goules. If you fail, nothing happens.]]></text>
+		</item>
+		<item id="5" type="unique" num="1">
+			<name><![CDATA[Sword of Glory]]></name>
+			<subtype>Magical weapon</subtype>
+			<hands>2</hands>
+			<price>8</price>
+			<text><![CDATA[Bonus: +6 Combat check]]></text>
+		</item>
+		<item id="6" type="spell" num="5" modifier="-1" cost="1">
+			<name><![CDATA[Shrivelling]]></name>
+			<hands>1</hands>
+			<text><![CDATA[Any Phase: Cast and exhaust to gain +6 to Combat checks until the end of this combat.]]></text>
+		</item>
+		<item id="7" type="spell" num="2" modifier="4" cost="2">
+			<name><![CDATA[Bind Monster]]></name>
+			<hands>2</hands>
+			<text><![CDATA[Any Phase: Cast and Discard this spell to pass one Combat check. You must roll successes equal to the monster's toughness to cast this spell. This spell doesn't work on Ancient Ones.]]></text>
+		</item>
+		<item id="8" type="spell" num="4" modifier="-1" cost="1">
+			<name><![CDATA[Find Gate]]></name>
+			<text><![CDATA[Movement: Cast and exhaust to immediately return to Arkham from an Other World.]]></text>
+		</item>
+	</items>
+	<skills>
+		<skill id="1" num="2">
+			<name>Fight</name>
+			<text><![CDATA[+1 Fight\n\nWhen you spend a Clue token to add to any Fight check, add one extra bonus die.]]></text>
+		</skill>
+		<skill id="2" num="2">
+			<name>Marksman</name>
+			<text><![CDATA[Any Phase: Exhaust to re-roll a Combat check.]]></text>
+		</skill>
+		<skill id="3" num="2">
+			<name>Stealth</name>
+			<text><![CDATA[Any Phase: Exhaust to re-roll an Evade check.]]></text>
+		</skill>
+	</skills>
+</cards>

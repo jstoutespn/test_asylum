@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<abominations>
+	<abomination id="1">
+		<name>Yig</name>
+		<combat>-3</combat>
+		<defenses>none</defenses>
+		<doom>10</doom>
+		<worshippers><![CDATA[Yig's worshippers are actually disguised serpent people. Their bite is highly poisonous. Cultists have a combat rating of +0 and a combat damage of 4 Stamina.]]></worshippers>
+		<power>
+			<title><![CDATA[Yig's Anger]]></title>
+			<text><![CDATA[While Yig stirs in his slumber, he gains a doom token whenever a Cultist is defeated or an investigator is Lost in Time and Space.]]></text>
+		</power>
+		<battlestart><![CDATA[Every investigator is Cursed. Any investigator that already has a Curse is devoured.]]></battlestart>
+		<attack><![CDATA[Each investigator must pass a Speed (+1) check or lose 1 Sanity and 1 Stamina. This check's modifier decreases by 1 each turn (+0 the 2nd turn, -1 the 3rd turn, etc.)]]></attack>
+	</abomination>
+	<abomination id="2">
+		<name>Hastur</name>
+		<combat><![CDATA[Special (See Start of Battle)]]></combat>
+		<defenses>Physical Resistance</defenses>
+		<doom>13</doom>
+		<worshippers><![CDATA[Hastur's worshippers ride byakhee mounts that they call with enchanted whistles. Cultists are flying monsters and their combat rating is -2.]]></worshippers>
+		<power>
+			<title><![CDATA[The King in Yellow]]></title>
+			<text><![CDATA[While Hastur stirs in his slumber, the cost to seal a gate is 8 Clue tokens instead of 5.]]></text>
+		</power>
+		<battlestart><![CDATA[Hastur's combat rating is set to -X, where X is the current terror level.]]></battlestart>
+		<attack><![CDATA[Each investigator must pass a Luck (+1) check or lose 2 Sanity. This check's modifier decreases by 1 each turn (+0 the 2nd turn, -1 the 3rd turn, etc.)]]></attack>
+	</abomination>
+	<abomination id="3">
+		<name>Cthulhu</name>
+		<combat>-6</combat>
+		<defenses><![CDATA[Special (See Attack)]]></defenses>
+		<doom>13</doom>
+		<worshippers><![CDATA[Cthulhu's worshippers often have the Innsmouth Look, a sign of monstrous ancestors. Cultists have a horror rating of -2 and a horror damage of 2 Sanity.]]></worshippers>
+		<power>
+			<title><![CDATA[Dreams of Madness]]></title>
+			<text><![CDATA[While Cthulhu stirs in his slumber, investigators have their maximum Sanity and maximum Stamina reduced by 1.]]></text>
+		</power>
+		<attack><![CDATA[Each investigator lowers either his maximum Sanity or Maximum Stamina by 1 (his choice). After Cthulhu attacks 1 doom token is placed back on Cthulhu's doom track if it isn't already full.]]></attack>
+	</abomination>
+	<abomination id="4">
+		<name>Ithaqua</name>
+		<combat>-3</combat>
+		<defenses>None</defenses>
+		<doom>11</doom>
+		<worshippers><![CDATA[Ithaqua's worshippers eat the flesh of their fellow men, gaining supernatural power through their dark practice. Cultists have their toughness increased by 2.]]></worshippers>
+		<power>
+			<title><![CDATA[Icy Winds]]></title>
+			<text><![CDATA[While Ithaqua stirs in his slumber, any investigator in a street area at the end of the Mythos phase loses 1 Stamina. In addition, all Weather cards are discarded without their special effects taking place.]]></text>
+		</power>
+		<battlestart><![CDATA[Investigators must roll a die for every item they have, discarding the item on a failure.]]></battlestart>
+		<attack><![CDATA[Each investigator must pass a Fight (+1) check or lose 2 Stamina. This check's modifier decreases by 1 each turn (+0 the 2nd turn, -1 the 3rd turn, etc.)]]></attack>
+	</abomination>
+</abominations>

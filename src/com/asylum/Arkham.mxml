@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:map="com.asylum.view.map.*">	
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:map="com.asylum.view.map.*"
+			   creationComplete="onCreated(event)">	
 	<fx:Style source="Arkham.css"/>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Config;
+			import com.asylum.data.enum.NoteName;
+			import com.asylum.util.XMLLoader;
+			
+			import mx.events.FlexEvent;
+			
+			import org.puremvc.as3.interfaces.IFacade;
+			import org.puremvc.as3.patterns.facade.Facade;
+			
+			private var facade:IFacade;
+			private var mediator:ArkhamMediator;
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				facade = Facade.getInstance();
+				mediator = new ArkhamMediator(this);
+				facade.registerMediator(mediator);
+				Config.i.getParameters(this.parameters);
+				// show error here if not provided
+				var configLoader:XMLLoader = new XMLLoader(Config.i.configURL, onConfig, onConfigFailure);
+			}
+			
+			private function onConfig(xml:XML):void {
+				Config.i.getConfig(xml);
+				facade.sendNotification(NoteName.START_APP);
+			}
+			
+			private function onConfigFailure(info:Object):void {
+				// do something here
+				trace("yeah, that didn't work");
+			}
+			
+		]]>
+	</fx:Script>
 	<s:Scroller width="100%" height="100%">
 		<s:Group>
 			<map:GameMap id="gameMap" />
