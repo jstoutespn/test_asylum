@@ -5,7 +5,7 @@ package com.asylum.data
 		public var title:String;
 		public var text:String;
 		
-		public function MonsterAbility(title:String, text:String)
+		public function MonsterAbility(title:String = null, text:String = null)
 		{
 			this.title = title;
 			this.text = text;

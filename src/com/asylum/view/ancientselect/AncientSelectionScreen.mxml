@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:components="com.asylum.view.components.*"
+		 width="100%" height="100%"
+		 creationComplete="onCreated(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.AncientOne;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			private var _dataProvider:ArrayCollection;
+			private var _index:int;
+			[Bindable] private var _selected:AncientOne;
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				_dataProvider = new ArrayCollection();
+				_index = 0;
+			}
+
+			public function get dataProvider():ArrayCollection
+			{
+				return _dataProvider;
+			}
+			
+			public function set dataProvider(value:ArrayCollection):void
+			{
+				_dataProvider = value;
+			}
+
+			private function onBack(event:MouseEvent):void
+			{
+				_index--;
+				if (_index < 0) {
+					_index = 0;
+				}
+				refreshData();
+			}
+			
+			private function onNext(event:MouseEvent):void
+			{
+				_index--;
+				if (_index == _dataProvider.length) {
+					_index = _dataProvider.length - 1;
+				}
+				refreshData();
+			}
+			
+			private function refreshData():void {
+				_selected = _dataProvider.getItemAt(_index) as AncientOne;
+				if (_index == 0) {
+					setBackEnabled(false);
+				} else {
+					setBackEnabled(true);
+				}
+				if (_index == _dataProvider.length - 1) {
+					setNextEnabled(false);
+				} else {
+					setNextEnabled(true);
+				}
+			}
+			
+			private function setBackEnabled(value:Boolean = true):void {
+				topBack.enabled = value;
+				downBack.enabled = value;
+			}
+			
+			private function setNextEnabled(value:Boolean = true):void {
+				topNext.enabled = value;
+				downNext.enabled = value;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:fill>
+			<s:SolidColor color="#333333" alpha="0.7" />
+		</s:fill>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" x="0" y="0" horizontalAlign="center" verticalAlign="middle">
+		<s:Group width="66%">
+			<s:Rect width="100%" height="100%" top="0" left="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#FFFFFF" weight="3" />
+				</s:stroke>
+			</s:Rect>
+			<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="30" paddingLeft="30" paddingRight="30" paddingBottom="30" horizontalAlign="center">
+				<s:Label text="select Ancient One" width="100%" fontFamily="Garamond" fontSize="48" color="#FFFFFF" fontWeight="bold" fontStyle="italic" />
+				<s:Group id="topControls" width="100%">
+					<s:Button id="topBack" label="&lt; Prev" top="0" left="0" click="onBack(event)" />
+					<s:Button id="topNext" label="Next &gt;" top="0" right="0" click="onNext(event)" />
+				</s:Group>
+				<components:AncientOneCard id="ancientOne" data="{_selected}" />
+				<s:Group id="downControls" width="100%">
+					<s:Button id="downBack" label="&lt; Prev" top="0" left="0" click="onBack(event)" />
+					<s:Button id="downNext" label="Next &gt;" top="0" right="0" />
+				</s:Group>
+				<s:Group width="100%">
+					<s:Button id="selectBtn" label="Select" right="0" />
+				</s:Group>
+			</s:VGroup>
+		</s:Group>
+	</s:VGroup>
+</s:Group>

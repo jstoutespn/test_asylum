@@ -9,8 +9,7 @@ package com.asylum.data
 		public var stamina:int;
 		public var maxStamina:int;
 		public var focus:int;
-		public var uniqueTitle:String;
-		public var uniqueText:String;
+		public var unique:MonsterAbility;
 		
 		public var speed:Stat;
 		public var sneak:Stat;
@@ -22,6 +21,7 @@ package com.asylum.data
 		public var cash:int;
 		public var clues:int;
 		
+		public var startItems:Vector.<int>;
 		public var randomDraw:RandomItemDraw;
 		
 		public var blessed:Boolean;
@@ -31,6 +31,9 @@ package com.asylum.data
 		{
 			blessed = false;
 			cursed = false;
+			startItems = new Vector.<int>();
+			unique = new MonsterAbility();
+			randomDraw = new RandomItemDraw();
 		}
 	}
 }

@@ -4,9 +4,9 @@ package com.asylum.data
 	{
 		public var id:int;
 		public var name:String;
-		public var number:int;
+		public var num:int;
 		public var symbol:String;
-		public var movement:int;
+		public var movement:String;
 		public var awareness:int;
 		public var combat:int;
 		public var damage:int;

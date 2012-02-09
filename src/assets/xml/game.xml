@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<game id="1" phase="setup" updated="" boss="" doom="" terror="">
+	<players>
+		<player id="14400053" name="Jon Stout" firstName="Jon" lastName="Stout" imageUrl="http://graph.facebook.com/14400053/picture" character="-1" order="-1" location="" firstPlayer="false" />
+		<player id="28501798" name="Ryan Lucas" firstName="Ryan" lastName="Lucas" imageUrl="http://graph.facebook.com/28501798/picture" />
+		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" />
+		<player id="28500502" name="Sebastian H. Orr" firstName="Sebastian" lastName="Orr" imageUrl="http://graph.facebook.com/28500502/picture" />
+	</players>
+	<monsters></monsters>
+	<gates></gates>
+	<items></items>
+	<locations></locations>
+	<logs></logs>
+</game>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="640" minHeight="480" creationComplete="onCreated(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.AncientOne;
+			
+			import mx.events.FlexEvent;
+			
+			private var isReady:Boolean;
+			private var _data:AncientOne;
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				isReady = true;
+				if (_data) {
+					refresh();
+				}
+			}
+			
+			public function get data():AncientOne
+			{
+				return _data;
+			}
+
+			public function set data(value:AncientOne):void
+			{
+				_data = value;
+				refresh();
+			}
+			
+			public function refresh():void {
+				if (isReady && _data) {
+					nameTxt.text = _data.name;
+					combatTxt.text = _data.combat;
+					defenseText.text = _data.defenses;
+					doomTxt.text = String(_data.doom);
+					powerTitle.text = _data.power.title;
+					powerText.text = _data.power.text;
+					if (_data.worshippers != "") {
+						worshipContainer.visible = worshipContainer.includeInLayout = true;
+						worshipText.text = _data.worshippers;
+					} else {
+						worshipContainer.visible = worshipContainer.includeInLayout = false;
+					}
+					if (_data.startBattleText != "") {
+						startContainer.visible = startContainer.includeInLayout = true;
+						startText.text = _data.startBattleText;
+					} else {
+						startContainer.visible = startContainer.includeInLayout = false;
+					}
+					if (_data.attack != "") {
+						attackContainer.visible = attackContainer.includeInLayout = true;
+						attackText.text = _data.attack;
+					} else {
+						attackContainer.visible = attackContainer.includeInLayout = false;
+					}
+					invalidateDisplayList();
+				}
+			}
+
+			
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%" top="0" left="0">
+		<s:fill>
+			<s:SolidColor color="#FFFFFF" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" top="0" left="0" paddingTop="20" paddingRight="20" paddingLeft="20" paddingBottom="20" gap="10">
+		<s:Label id="nameTxt" width="100%" fontFamily="Garamond" fontSize="48" fontWeight="bold" text="Ithaqua" />
+		<s:HGroup width="100%">
+			<s:Label text="Doom:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="doomTxt" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Combat:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="combatTxt" fontFamily="Garamond" fontSize="24" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Defenses:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="defenseText" fontFamily="Garamond" fontSize="24" />
+		</s:HGroup>
+		<s:VGroup width="100%" gap="6">
+			<s:HGroup width="100%">
+				<s:Label text="Power:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+				<s:Label id="powerTitle" fontFamily="Garamond" fontSize="24" fontWeight="bold" fontStyle="italic" text="Icy Winds" />
+			</s:HGroup>
+			<s:Label id="powerText" width="100%" fontFamily="Garamond" fontSize="18" text="" />
+		</s:VGroup>
+		<s:VGroup id="worshipContainer" width="100%" gap="6">
+			<s:Label text="Worshippers:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="worshipText" width="100%" fontFamily="Garamond" fontSize="18" />
+		</s:VGroup>
+		<s:VGroup id="startContainer" width="100%" gap="6">
+			<s:Label text="Start of Battle:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="startText" width="100%" fontFamily="Garamond" fontSize="18" />
+		</s:VGroup>
+		<s:VGroup id="attackContainer" width="100%" gap="6">
+			<s:Label text="Attack:" fontFamily="Garamond" fontSize="24" fontWeight="bold" />
+			<s:Label id="attackText" width="100%" fontFamily="Garamond" fontSize="18" />
+		</s:VGroup>		
+	</s:VGroup>
+</s:Group>

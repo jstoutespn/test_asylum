@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+	<gameUrl>assets/xml/game.xml</gameUrl>
 	<abomUrl>assets/xml/abominations.xml</abomUrl>
 	<cardUrl>assets/xml/cards.xml</cardUrl>
 	<charUrl>assets/xml/characters.xml</charUrl>
+	<monUrl>assets/xml/monsters.xml</monUrl>
 </config>

@@ -9,8 +9,10 @@ package com.asylum.data
 		private var _accessToken:String;
 		private var _configURL:String;
 		private var _gameURL:String;
+		private var _abominationsURL:String;
 		private var _cardsURL:String;
 		private var _charactersURL:String;
+		private var _monstersURL:String;
 		
 		public static function getInstance():Config
 		{
@@ -36,8 +38,16 @@ package com.asylum.data
 		}
 		
 		public function getConfig(xml:XML):void {
+			_gameURL = xml..gameUrl;
+			_abominationsURL = xml..abomUrl;
 			_cardsURL = xml..cardUrl;
 			_charactersURL = xml..charUrl;
+			_monstersURL = xml..monUrl;
+		}
+
+		public function get gameId():int
+		{
+			return _gameId;
 		}
 
 		public function get userId():String
@@ -70,6 +80,14 @@ package com.asylum.data
 			return _charactersURL;
 		}
 
+		public function get abominationsURL():String
+		{
+			return _abominationsURL;
+		}
 
+		public function get monstersURL():String
+		{
+			return _monstersURL;
+		}
 	}
 } class SingletonEnforcer {}

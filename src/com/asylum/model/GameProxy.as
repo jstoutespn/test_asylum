@@ -13,8 +13,8 @@ package com.asylum.model
 	{
 		public static const NAME:String = "gameProxy";
 		
-		public var gameId:int;
 		public var gamePhase:String;
+		public var lastUpdate:uint;
 		public var boss:AncientOne;
 		public var doomTrack:int;
 		public var terrorTrack:int;
@@ -32,6 +32,7 @@ package com.asylum.model
 		
 		public function GameProxy()
 		{
+			lastUpdate = 0;
 			players = new Vector.<Player>();
 			monsters = new Vector.<MonsterInstance>();
 			monsterCup = new Vector.<MonsterInstance>();

@@ -9,10 +9,18 @@ package com.asylum.util
 		private var resultFunction:Function;
 		private var faultFunction:Function;
 		
-		public function XMLLoader(url:String, onResult:Function, onFault:Function, params:Object = null)
+		public function XMLLoader(url:String, onResult:Function, onFault:Function, params:Object = null, preventCache:Boolean = false)
 		{
 			resultFunction = onResult;
 			faultFunction = onFault;
+			if (preventCache) {
+				var rand:Number = Math.floor(Math.random() * int.MAX_VALUE);
+				if (params != null) {
+					params['rand'] = rand;
+				} else {
+					params = {'rand':rand};
+				}
+			}
 			service = new HTTPService();
 			service.url = url;
 			service.resultFormat = 'e4x';

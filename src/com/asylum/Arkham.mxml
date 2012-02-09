@@ -2,10 +2,11 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:map="com.asylum.view.map.*"
-			   creationComplete="onCreated(event)">	
+			   currentState="loading" creationComplete="onCreated(event)">	
 	<fx:Style source="Arkham.css"/>
 	<fx:Script>
 		<![CDATA[
+			import com.asylum.control.StartApplicationCommand;
 			import com.asylum.data.Config;
 			import com.asylum.data.enum.NoteName;
 			import com.asylum.util.XMLLoader;
@@ -23,6 +24,7 @@
 				facade = Facade.getInstance();
 				mediator = new ArkhamMediator(this);
 				facade.registerMediator(mediator);
+				facade.registerCommand(NoteName.START_APP, StartApplicationCommand);
 				Config.i.getParameters(this.parameters);
 				// show error here if not provided
 				var configLoader:XMLLoader = new XMLLoader(Config.i.configURL, onConfig, onConfigFailure);
@@ -40,9 +42,34 @@
 			
 		]]>
 	</fx:Script>
-	<s:Scroller width="100%" height="100%">
+	<s:states>
+		<s:State name="playing"/>
+		<s:State name="loading"/>
+		<s:State name="bossSelect" />
+	</s:states>
+	<s:Scroller width="100%" height="100%" x="0" y="0">
 		<s:Group>
 			<map:GameMap id="gameMap" />
 		</s:Group>
 	</s:Scroller>
+	<s:Group id="loadScreen" includeIn="loading" width="100%" height="100%" x="0" y="0">
+		<s:Rect width="100%" height="100%" x="0" y="0">
+			<s:fill>
+				<s:SolidColor color="#333333" alpha="0.7" />
+			</s:fill>
+		</s:Rect>
+		<s:VGroup width="100%" height="100%" x="0" y="0" horizontalAlign="center" verticalAlign="middle">
+			<s:Group id="loadContainer">
+				<s:Rect width="100%" height="100%" top="0" left="0">
+					<s:stroke>
+						<s:SolidColorStroke color="#FFFFFF" weight="3" />
+					</s:stroke>
+				</s:Rect>
+				<s:VGroup width="100%" height="100%" top="0" left="0" paddingTop="20" paddingRight="20" paddingLeft="20" paddingBottom="20" gap="36">
+					<s:Label id="loadTitle" text="loading..." fontWeight="bold" fontFamily="Garamond" fontSize="48" color="#FFFFFF" />
+					<s:Label id="loadLabel" width="{loadTitle.width}" fontFamily="Garamond" fontSize="24" color="#FFFFFF" textAlign="center" text="" />
+				</s:VGroup>
+			</s:Group>
+		</s:VGroup>
+	</s:Group>
 </s:Application>

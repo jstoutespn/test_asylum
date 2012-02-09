@@ -47,8 +47,8 @@
     <gear>
       <fixed>
 	  	<cash>4</cash>
-		<common id="dynamite" />
-		<common id="tommy gun" />
+		<item id="9" />
+		<item id="10" />
 	  </fixed>
       <random>
         <uniqueItems num="1"/>
@@ -133,7 +133,7 @@
       <fixed>
 	  	<cash>8</cash>
 		<clue>3</clue>
-		<common id=".45 Automatic" />
+		<item id="1" />
 	  </fixed>
       <random>
         <commonItems num="2"/>
@@ -160,8 +160,8 @@
     <gear>
       <fixed>
 	  	<status id="blessing" />
-		<common id="Cross" />
-		<unique id="Holy Water" />
+		<item id="11" />
+		<item id="12" />
 	  </fixed>
       <random>
         <spells num="2"/>
@@ -217,7 +217,7 @@
     <gear>
       <fixed>
 	  	<cash>5</cash>
-		<spell id="Shrivelling" />
+		<item id="6" />
 	  </fixed>
       <random>
         <commonItems num="1"/>

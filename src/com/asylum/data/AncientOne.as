@@ -4,17 +4,23 @@ package com.asylum.data
 	{
 		public var id:int;
 		public var name:String;
-		public var combat:int;
+		public var combat:String;
 		public var defenses:String;
 		public var doom:int;
 		public var worshippers:String;
-		public var powerTitle:String;
-		public var powerText:String;
+		public var power:MonsterAbility;
 		public var startBattleText:String;
 		public var attack:String;
 		
 		public function AncientOne()
 		{
+			name = "";
+			combat = "";
+			defenses = "";
+			worshippers = "";
+			startBattleText = "";
+			attack = "";
+			power = new MonsterAbility();
 		}
 	}
 }

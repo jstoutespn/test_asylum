@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monsters>
+	<monster id="0" num="5" symbol="star" movement="flying" awareness="0" horror="0" sandamage="0" toughness="1" combat="-2" damage="2">
+		<name>Fire Vampire</name>
+		<abilities>
+			<ability title="Ambush"><![CDATA[Once combat has begun with this creature, the investigator no longer has the option to flee it, but must instead fight until one or the other is defeated.]]></ability>
+			<ability title="Physical Immunity"><![CDATA[A Weapon or Spell that adds a physical bonus provides none of its normal bonus against monsters with physical immunity.]]></ability>
+		</abilities>
+	</monster>
+</monsters>

@@ -14,6 +14,8 @@ package com.asylum.data
 		public function Item()
 		{
 			hands = 0;
+			price = 0;
+			subType = "";
 		}
 	}
 }

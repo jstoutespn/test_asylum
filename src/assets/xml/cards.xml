@@ -50,6 +50,34 @@
 			<name><![CDATA[Find Gate]]></name>
 			<text><![CDATA[Movement: Cast and exhaust to immediately return to Arkham from an Other World.]]></text>
 		</item>
+		<item id="9" type="common" num="2">
+			<name><![CDATA[Dynamite]]></name>
+			<subtype>Physical weapon</subtype>
+			<price>4</price>
+			<hands>2</hands>
+			<text><![CDATA[Bonus: +8 Combat Check (Discard after use)]]></text>
+		</item>
+		<item id="10" type="common" num="2">
+			<name><![CDATA[Tommy Gun]]></name>
+			<subtype>Physical weapon</subtype>
+			<hands>2</hands>
+			<price>7</price>
+			<text><![CDATA[Bonus: +6 Combat check]]></text>
+		</item>
+		<item id="11" type="common" num="2">
+			<name><![CDATA[Cross]]></name>
+			<subtype>Magical weapon</subtype>
+			<hands>1</hands>
+			<price>3</price>
+			<text><![CDATA[Bonus: +0 Combat check (+3 if Opponent is Undead); +1 Horror check]]></text>
+		</item>
+		<item id="12" type="unique" num="4">
+			<name>Holy Water</name>
+			<subtype>Magical weapon</subtype>
+			<hands>2</hands>
+			<price>4</price>
+			<text><![CDATA[Bonus: +6 Combat check (Discard after use)]]></text>
+		</item>
 	</items>
 	<skills>
 		<skill id="1" num="2">
