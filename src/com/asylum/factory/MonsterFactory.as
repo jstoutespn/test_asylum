@@ -1,8 +1,10 @@
 package com.asylum.factory
 {
 	import com.asylum.data.AncientOne;
+	import com.asylum.data.Config;
 	import com.asylum.data.Monster;
 	import com.asylum.data.MonsterAbility;
+	import com.asylum.data.MonsterInstance;
 
 	public class MonsterFactory
 	{
@@ -44,6 +46,28 @@ package com.asylum.factory
 				mon.abilities.push(monAbil);
 			}
 			return mon;
+		}
+		
+		public static function getMonsterInstanceId(monsterId:int, monsterNumber:int):String {
+			return new String("mon_" + Config.i.gameId + "_" + monsterId + "_" + monsterNumber);
+		}
+		
+		public static function getMonsterInstanceXML(monster:MonsterInstance):XML {
+			var xml:XML = new XML("<monster></monster>");
+			xml.@id = monster.id;
+			xml.@source = monster.source.id;
+			if (monster.isTrophy) {
+				xml.@trophy = "true";
+				xml.@owner = monster.claimant.id;
+			} else {
+				xml.@trophy = "false";
+				if (monster.location != null) {
+					xml.@location = monster.location.mapId;
+				} else {
+					xml.@location = "cup";
+				}
+			}
+			return xml;
 		}
 	}
 }

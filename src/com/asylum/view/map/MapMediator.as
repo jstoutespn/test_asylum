@@ -22,6 +22,14 @@ package com.asylum.view.map
 			return viewComponent as GameMap;
 		}
 		
+		public function getArkhamLocations():Vector.<ILocation> {
+			var list:Vector.<ILocation> = new Vector.<ILocation>();
+			for each (var loc:ArkhamLocation in view.locations) {
+				list.push(loc);
+			}
+			return list;
+		}
+		
 		private function onNoteEvent(event:NoteEvent):void
 		{
 			sendNotification(event.name, event.message);

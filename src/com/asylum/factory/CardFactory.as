@@ -1,8 +1,12 @@
 package com.asylum.factory
 {
+	import com.asylum.data.Config;
 	import com.asylum.data.Gate;
+	import com.asylum.data.GateInstance;
 	import com.asylum.data.Item;
+	import com.asylum.data.ItemInstance;
 	import com.asylum.data.Skill;
+	import com.asylum.data.SkillInstance;
 	import com.asylum.data.Spell;
 
 	public class CardFactory
@@ -64,6 +68,62 @@ package com.asylum.factory
 			skill.name = xml..name;
 			skill.text = xml..text;
 			return skill;
+		}
+		
+		public static function getGateTokenId(gateId:int, gateNum:int):String {
+			return new String("gate_" + Config.i.gameId + "_" + gateId + "_" + gateNum);
+		}
+		
+		public static function getItemCardId(itemId:int, itemNum:int):String {
+			return new String("item_" + Config.i.gameId + "_" + itemId + "_" + itemNum);
+		}
+		
+		public static function getSkillCardId(skillId:int, skillNum:int):String {
+			return new String("skill_" + Config.i.gameId + "_" + skillId + "_" + skillNum);
+		}
+		
+		public static function getGateTokenXML(gate:GateInstance):XML {
+			var xml:XML = new XML("<gate></gate>");
+			xml.@id = gate.id;
+			xml.@source = gate.source.id;
+			if (gate.isTrophy) {
+				xml.@trophy = "true";
+				xml.@owner = gate.claimant.id;
+			} else {
+				xml.@trophy = "false";
+				if (gate.location) {
+					xml.@location = gate.location.mapId;
+				} else {
+					xml.@location = "cup";
+				}
+			}
+			return xml;
+		}
+		
+		public static function getItemCardXML(item:ItemInstance):XML {
+			var xml:XML = new XML("<item></item>");
+			xml.@id = item.id;
+			xml.@source = item.source.id;
+			if (item.isInPlay) {
+				xml.@inplay = "true";
+				xml.@owner = item.owner.id;
+			} else {
+				xml.@inplay = "false";
+			}
+			return xml;
+		}
+		
+		public static function getSkillCardXML(skill:SkillInstance):XML {
+			var xml:XML = new XML("<skill></skill>");
+			xml.@id = skill.id;
+			xml.@source = skill.source.id;
+			if (skill.isInPlay) {
+				xml.@inplay = "true";
+				xml.@owner = skill.owner.id;
+			} else {
+				xml.@inplay = "false";
+			}
+			return xml;
 		}
 	}
 }

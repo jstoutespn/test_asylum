@@ -5,13 +5,14 @@
 		 xmlns:components="com.asylum.view.components.*"
 		 width="100%" height="100%"
 		 creationComplete="onCreated(event)">
-	
 	<fx:Script>
 		<![CDATA[
 			import com.asylum.data.AncientOne;
 			
 			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
+			
+			public static const SELECTED:String = "ancientSelected";
 			
 			private var _dataProvider:ArrayCollection;
 			private var _index:int;
@@ -31,6 +32,27 @@
 			public function set dataProvider(value:ArrayCollection):void
 			{
 				_dataProvider = value;
+				refreshData();
+			}
+			
+			public function get index():int
+			{
+				return _index;
+			}
+			
+			public function set index(value:int):void
+			{
+				_index = value;
+				if (_index < 0) {
+					_index = 0;
+				} else if (_index > _dataProvider.length - 1) {
+					_index = _dataProvider.length - 1;
+				}
+				refreshData();
+			}
+			
+			public function get selection():AncientOne {
+				return _selected;
 			}
 
 			private function onBack(event:MouseEvent):void
@@ -44,7 +66,7 @@
 			
 			private function onNext(event:MouseEvent):void
 			{
-				_index--;
+				_index++;
 				if (_index == _dataProvider.length) {
 					_index = _dataProvider.length - 1;
 				}
@@ -75,9 +97,12 @@
 				downNext.enabled = value;
 			}
 			
+			private function onSelect(event:MouseEvent):void
+			{
+				dispatchEvent(new Event(SELECTED));
+			}
 		]]>
 	</fx:Script>
-	
 	<s:Rect width="100%" height="100%" x="0" y="0">
 		<s:fill>
 			<s:SolidColor color="#333333" alpha="0.7" />
@@ -96,14 +121,14 @@
 					<s:Button id="topBack" label="&lt; Prev" top="0" left="0" click="onBack(event)" />
 					<s:Button id="topNext" label="Next &gt;" top="0" right="0" click="onNext(event)" />
 				</s:Group>
-				<components:AncientOneCard id="ancientOne" data="{_selected}" />
+				<components:AncientOneCard id="ancientOne" width="640" data="{_selected}" />
 				<s:Group id="downControls" width="100%">
 					<s:Button id="downBack" label="&lt; Prev" top="0" left="0" click="onBack(event)" />
 					<s:Button id="downNext" label="Next &gt;" top="0" right="0" />
 				</s:Group>
-				<s:Group width="100%">
-					<s:Button id="selectBtn" label="Select" right="0" />
-				</s:Group>
+				<s:HGroup width="100%" horizontalAlign="center">
+					<s:Button id="selectBtn" label="Select" width="50%" click="onSelect(event)" />
+				</s:HGroup>
 			</s:VGroup>
 		</s:Group>
 	</s:VGroup>

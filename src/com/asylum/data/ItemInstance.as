@@ -7,8 +7,10 @@ package com.asylum.data
 		public var isInPlay:Boolean;
 		public var owner:Player;
 		
-		public function ItemInstance()
+		public function ItemInstance(item:Item = null)
 		{
+			source = item;
+			isInPlay = false;
 		}
 	}
 }

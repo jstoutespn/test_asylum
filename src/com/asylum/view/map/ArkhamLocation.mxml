@@ -6,6 +6,8 @@
 		 implements="com.asylum.view.map.ILocation"
 		 initialize="onInit(event)"
 		 creationComplete="onCreated(event)"
+		 mouseOver="onMouseOver(event)"
+		 mouseOut="onMouseOut(event)"
 		 dragEnter="onDragEnter(event)"
 		 dragDrop="onDrop(event)">
 	<fx:Script>
@@ -33,11 +35,15 @@
 			public var canHazGate:Boolean;
 			public var hazGate:Boolean;
 			private var _isSealed:Boolean;
+			private var _isClosed:Boolean;
 			[Bindable] private var _gate:GateInstance;
 			[Bindable] public var label1:String;
 			[Bindable] public var label2:String;
 			public var specialAction:Object;
 			private var specialTextExpanded:Boolean;
+			private var isMoving:Boolean;
+			private var moveXAdjust:Number;
+			private var moveYAdjust:Number;
 						
 			public function get mapId():String
 			{
@@ -94,8 +100,12 @@
 			private function onInit(event:FlexEvent):void
 			{
 				_isSealed = false;
+				_isClosed = false;
 				clues = 0;
 				specialTextExpanded = false;
+				isMoving = false;
+				moveXAdjust = 0;
+				moveYAdjust = 0;
 				_chars = new ArrayCollection();
 				_mons = new ArrayCollection();
 				_chars.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange, false, 0, true);
@@ -123,9 +133,9 @@
 				var dragType:String = event.dragSource.dataForFormat('type') as String;
 				if (dragType == DragType.GATE && canHazGate && !hazGate && !_isSealed) {
 					DragManager.acceptDragDrop(this);
-				} else if (dragType == DragType.PLAYER) {
+				} else if (dragType == DragType.PLAYER && !_isClosed) {
 					DragManager.acceptDragDrop(this);
-				} else if (dragType == DragType.MONSTER) {
+				} else if (dragType == DragType.MONSTER && !_isClosed) {
 					DragManager.acceptDragDrop(this);
 				}
 			}
@@ -143,6 +153,22 @@
 					var myMonster:MonsterInstance = event.dragSource.dataForFormat('obj') as MonsterInstance;
 					dispatchEvent( new NoteEvent(NoteName.MOVE_MONSTER, {to:this, monster:myMonster}) );
 				}
+			}
+			
+			private function onMouseOver(event:MouseEvent):void
+			{
+				/* if (!DragManager.isDragging) {
+					moveBtn.visible = moveBtn.mouseEnabled = true;
+				} else {
+					moveBtn.visible = moveBtn.mouseEnabled = false;
+				} */
+			}
+			
+			private function onMouseOut(event:MouseEvent):void
+			{
+				/* if (moveBtn.visible) {
+					moveBtn.visible = moveBtn.mouseEnabled = false;
+				} */
 			}
 
 			private function onCollectionChange(event:CollectionEvent):void
@@ -189,6 +215,33 @@
 				}
 				dispatchEvent(new NoteEvent(NoteName.SET_LOCATION_CLUES, {'clues':0, 'location':this}));
 			}
+			
+			private function onStartMove(event:MouseEvent):void
+			{
+				/* if (!isMoving && moveBtn.mouseEnabled) {
+					moveXAdjust = this.width - 40 + event.localX;
+					moveYAdjust = event.localY;
+					isMoving = true;
+					addEventListener(MouseEvent.MOUSE_MOVE, onMoveLocation, false, 0, true);
+				} */
+			}
+			
+			private function onMoveLocation(event:MouseEvent):void
+			{
+				if (isMoving) {
+				}
+			}
+
+			private function onEndMove(event:MouseEvent):void
+			{
+				/* if (isMoving) {
+					isMoving = false;
+					moveXAdjust = 0;
+					moveYAdjust = 0;
+					removeEventListener(MouseEvent.MOUSE_MOVE, onMoveLocation);
+				} */
+			}
+			
 			
 		]]>
 	</fx:Script>
@@ -251,4 +304,6 @@
 			<s:Label id="label2Label" text="{this.label2}" />
 		</s:HGroup>
 	</s:VGroup>
+	<s:Label id="moveBtn" text="move" width="40" height="25" top="0" right="0" textAlign="center" verticalAlign="middle" buttonMode="true" fontSize="10"
+			 visible="false" mouseEnabled="false" mouseDown="onStartMove(event)" mouseUp="onEndMove(event)" />
 </s:Group>

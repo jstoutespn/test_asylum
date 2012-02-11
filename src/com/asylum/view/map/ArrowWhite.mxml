@@ -3,7 +3,13 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 width="30" height="100%" minHeight="100">
-	<s:Rect width="9" height="100%" top="0" bottom="30" horizontalCenter="0">
+	<fx:Script>
+		<![CDATA[
+			[Bindable] public var showBackArrow:Boolean;
+			[Bindable] public var backArrowTop:Number;
+		]]>
+	</fx:Script>
+	<s:Rect width="9" height="100%" top="0" bottom="28" horizontalCenter="0">
 		<s:fill>
 			<s:SolidColor id="rectFill" color="#FFFFFF" />
 		</s:fill>
@@ -11,6 +17,14 @@
 			<s:SolidColorStroke color="#000000" weight="3" scaleMode="none" />
 		</s:stroke>
 	</s:Rect>
+	<s:Path data="M0 30 15 0 30 30 0 30Z" visible="{showBackArrow}" top="{backArrowTop-3}" horizontalCenter="0">
+		<s:fill>
+			<s:SolidColor color="#000000" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" scaleMode="none" />
+		</s:stroke>
+	</s:Path>
 	<s:Path data="M0 0 30 0 15 29.5 0 0Z" bottom="0" horizontalCenter="0">
 		<s:fill>
 			<s:SolidColor id="triFill" color="#FFFFFF" />

@@ -3,6 +3,7 @@ package com.asylum.model
 	import com.asylum.data.AncientOne;
 	import com.asylum.data.GateInstance;
 	import com.asylum.data.ItemInstance;
+	import com.asylum.data.LocationState;
 	import com.asylum.data.MonsterInstance;
 	import com.asylum.data.Player;
 	import com.asylum.data.SkillInstance;
@@ -13,7 +14,7 @@ package com.asylum.model
 	{
 		public static const NAME:String = "gameProxy";
 		
-		public var gamePhase:String;
+		public var phase:String;
 		public var lastUpdate:uint;
 		public var boss:AncientOne;
 		public var doomTrack:int;
@@ -28,6 +29,7 @@ package com.asylum.model
 		public var uniqueItemDeck:Vector.<ItemInstance>;
 		public var spellDeck:Vector.<ItemInstance>;
 		public var skillDeck:Vector.<SkillInstance>;
+		public var locationStates:Vector.<LocationState>;
 		public var graveyard:Vector.<Player>;
 		
 		public function GameProxy()
@@ -43,6 +45,7 @@ package com.asylum.model
 			uniqueItemDeck = new Vector.<ItemInstance>();
 			spellDeck = new Vector.<ItemInstance>();
 			skillDeck = new Vector.<SkillInstance>();
+			locationStates = new Vector.<LocationState>();
 			graveyard = new Vector.<Player>();
 			super(NAME, null);
 		}

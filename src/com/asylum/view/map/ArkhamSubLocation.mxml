@@ -65,7 +65,7 @@
 			}
 		]]>
 	</fx:Script>
-	<s:Rect id="backFill" width="100%" height="100%" x="0" y="0" visible="false">
+	<s:Rect id="backFill" width="100%" height="100%" x="0" y="0">
 		<s:stroke>
 			<s:SolidColorStroke color="#FFFFFF" weight="3" />
 		</s:stroke>
@@ -79,7 +79,7 @@
 		</s:stroke>
 	</s:Rect>
 	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" gap="6">
-		<s:Label id="locationLabel" width="100%" fontFamily="Garamond" fontSize="24" text="{_locationName}"/>
+		<s:Label id="subLabel" width="100%" fontFamily="Garamond" fontSize="24" text="{_subName}"/>
 		<s:VGroup width="100%" gap="10">
 			<map:MiniatureContainer id="charContainer" width="100%" dataProvider="{_chars}" />
 			<map:MiniatureContainer id="monContainer" width="100%" dataProvider="{_mons}" />

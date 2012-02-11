@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:map="com.asylum.view.map.*"
-			   currentState="loading" creationComplete="onCreated(event)">	
+			   currentState="initial" creationComplete="onCreated(event)" xmlns:ancient="com.asylum.view.ancient.*">	
 	<fx:Style source="Arkham.css"/>
 	<fx:Script>
 		<![CDATA[
@@ -27,6 +27,7 @@
 				facade.registerCommand(NoteName.START_APP, StartApplicationCommand);
 				Config.i.getParameters(this.parameters);
 				// show error here if not provided
+				currentState = "loading";
 				var configLoader:XMLLoader = new XMLLoader(Config.i.configURL, onConfig, onConfigFailure);
 			}
 			
@@ -43,6 +44,7 @@
 		]]>
 	</fx:Script>
 	<s:states>
+		<s:State name="initial"/>
 		<s:State name="playing"/>
 		<s:State name="loading"/>
 		<s:State name="bossSelect" />
@@ -52,7 +54,8 @@
 			<map:GameMap id="gameMap" />
 		</s:Group>
 	</s:Scroller>
-	<s:Group id="loadScreen" includeIn="loading" width="100%" height="100%" x="0" y="0">
+	<ancient:AncientScreen id="ancientScreen" includeIn="initial,bossSelect" width="100%" height="100%" x="0" y="0" />
+	<s:Group id="loadScreen" includeIn="initial,loading" width="100%" height="100%" x="0" y="0">
 		<s:Rect width="100%" height="100%" x="0" y="0">
 			<s:fill>
 				<s:SolidColor color="#333333" alpha="0.7" />

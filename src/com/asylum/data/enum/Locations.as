@@ -37,6 +37,7 @@ package com.asylum.data.enum
 		// Rivertown
 		public static const RIVERTOWN:String = "rivertown";
 		public static const GRAVEYARD:String = "graveyard";
+		public static const BLACK_CAVE:String = "blackCave";
 		public static const GENERAL_STORE:String = "genstore";
 		// French Hill
 		public static const FRENCH_HILL:String = "fhill";
@@ -80,5 +81,10 @@ package com.asylum.data.enum
 		public static const ANOTHERDIM:String = "anotherdim";
 		public static const ANOTHERDIM_ONE:String = "anotherdim1";
 		public static const ANOTHERDIM_TWO:String = "anotherdim2";
+		
+		// CITY LIMITS
+		public static const OUTSKIRTS:String = "outskirts";
+		public static const SKY:String = "sky";
+		public static const LOST_IN_TIME_AND_SPACE:String = "lostInSpace";
 	}
 }

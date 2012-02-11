@@ -6,9 +6,87 @@
 		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" />
 		<player id="28500502" name="Sebastian H. Orr" firstName="Sebastian" lastName="Orr" imageUrl="http://graph.facebook.com/28500502/picture" />
 	</players>
-	<monsters></monsters>
-	<gates></gates>
-	<items></items>
-	<locations></locations>
+	<monsters>
+	  <monster id="mon_1_0_0" source="0" trophy="false" location="cup"/>
+	  <monster id="mon_1_0_1" source="0" trophy="false" location="cup"/>
+	  <monster id="mon_1_0_2" source="0" trophy="false" location="cup"/>
+	  <monster id="mon_1_0_3" source="0" trophy="false" location="cup"/>
+	  <monster id="mon_1_0_4" source="0" trophy="false" location="cup"/>
+	</monsters>
+	<gates>
+	  <gate id="gate_1_0_0" source="0" trophy="false" location="cup"/>
+	  <gate id="gate_1_1_0" source="1" trophy="false" location="cup"/>
+	  <gate id="gate_1_2_0" source="2" trophy="false" location="cup"/>
+	</gates>
+	<items>
+	  <item id="item_1_1_0" source="1" inplay="false"/>
+	  <item id="item_1_1_1" source="1" inplay="false"/>
+	  <item id="item_1_2_0" source="2" inplay="false"/>
+	  <item id="item_1_2_1" source="2" inplay="false"/>
+	  <item id="item_1_9_0" source="9" inplay="false"/>
+	  <item id="item_1_9_1" source="9" inplay="false"/>
+	  <item id="item_1_10_0" source="10" inplay="false"/>
+	  <item id="item_1_10_1" source="10" inplay="false"/>
+	  <item id="item_1_11_0" source="11" inplay="false"/>
+	  <item id="item_1_11_1" source="11" inplay="false"/>
+	  <item id="item_1_3_0" source="3" inplay="false"/>
+	  <item id="item_1_3_1" source="3" inplay="false"/>
+	  <item id="item_1_3_2" source="3" inplay="false"/>
+	  <item id="item_1_3_3" source="3" inplay="false"/>
+	  <item id="item_1_4_0" source="4" inplay="false"/>
+	  <item id="item_1_4_1" source="4" inplay="false"/>
+	  <item id="item_1_5_0" source="5" inplay="false"/>
+	  <item id="item_1_12_0" source="12" inplay="false"/>
+	  <item id="item_1_12_1" source="12" inplay="false"/>
+	  <item id="item_1_12_2" source="12" inplay="false"/>
+	  <item id="item_1_12_3" source="12" inplay="false"/>
+	  <item id="item_1_6_0" source="6" inplay="false"/>
+	  <item id="item_1_6_1" source="6" inplay="false"/>
+	  <item id="item_1_6_2" source="6" inplay="false"/>
+	  <item id="item_1_6_3" source="6" inplay="false"/>
+	  <item id="item_1_6_4" source="6" inplay="false"/>
+	  <item id="item_1_7_0" source="7" inplay="false"/>
+	  <item id="item_1_7_1" source="7" inplay="false"/>
+	  <item id="item_1_8_0" source="8" inplay="false"/>
+	  <item id="item_1_8_1" source="8" inplay="false"/>
+	  <item id="item_1_8_2" source="8" inplay="false"/>
+	  <item id="item_1_8_3" source="8" inplay="false"/>
+	</items>
+	<skills>
+	  <skill id="skill_1_1_0" source="1" inplay="false"/>
+	  <skill id="skill_1_1_1" source="1" inplay="false"/>
+	  <skill id="skill_1_2_0" source="2" inplay="false"/>
+	  <skill id="skill_1_2_1" source="2" inplay="false"/>
+	  <skill id="skill_1_3_0" source="3" inplay="false"/>
+	  <skill id="skill_1_3_1" source="3" inplay="false"/>
+	</skills>
+	<locations>
+	  <location id="newspaper" clues="0" closed="false" sealed="false"/>
+	  <location id="train" clues="0" closed="false" sealed="false"/>
+	  <location id="curiositie" clues="0" closed="false" sealed="false"/>
+	  <location id="unvisited" clues="0" closed="false" sealed="false"/>
+	  <location id="unnameable" clues="0" closed="false" sealed="false"/>
+	  <location id="docks" clues="0" closed="false" sealed="false"/>
+	  <location id="science" clues="0" closed="false" sealed="false"/>
+	  <location id="admin" clues="0" closed="false" sealed="false"/>
+	  <location id="library" clues="0" closed="false" sealed="false"/>
+	  <location id="hospital" clues="0" closed="false" sealed="false"/>
+	  <location id="magicshop" clues="0" closed="false" sealed="false"/>
+	  <location id="woods" clues="0" closed="false" sealed="false"/>
+	  <location id="bank" clues="0" closed="false" sealed="false"/>
+	  <location id="asylum" clues="0" closed="false" sealed="false"/>
+	  <location id="indsquare" clues="0" closed="false" sealed="false"/>
+	  <location id="roadhouse" clues="0" closed="false" sealed="false"/>
+	  <location id="diner" clues="0" closed="false" sealed="false"/>
+	  <location id="police" clues="0" closed="false" sealed="false"/>
+	  <location id="graveyard" clues="0" closed="false" sealed="false"/>
+	  <location id="blackCave" clues="0" closed="false" sealed="false"/>
+	  <location id="genstore" clues="0" closed="false" sealed="false"/>
+	  <location id="witchhouse" clues="0" closed="false" sealed="false"/>
+	  <location id="silverlodge" clues="0" closed="false" sealed="false"/>
+	  <location id="boardhouse" clues="0" closed="false" sealed="false"/>
+	  <location id="church" clues="0" closed="false" sealed="false"/>
+	  <location id="historical" clues="0" closed="false" sealed="false"/>
+	</locations>	
 	<logs></logs>
 </game>

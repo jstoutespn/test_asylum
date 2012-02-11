@@ -19,7 +19,7 @@ package com.asylum.control
 		
 		override public function execute(notification:INotification):void
 		{
-			var args:Object = {game:Config.i.gameId, uid:Config.i.userId, lastUpdate:0};
+			var args:Object = {game:Config.i.gameId, user:Config.i.userId, lastUpdate:0};
 			var loader:XMLLoader = new XMLLoader(Config.i.gameURL, onResult, onFault, args, true);
 		}
 		
@@ -29,7 +29,7 @@ package com.asylum.control
 				return;
 			}
 			var gameProxy:GameProxy = facade.retrieveProxy(GameProxy.NAME) as GameProxy;
-			gameProxy.gamePhase = xml.@phase;
+			gameProxy.phase = xml.@phase;
 			// get players regardless of phase
 			var playerList:XMLList = xml..players.player;
 			var player:Player;
@@ -38,11 +38,11 @@ package com.asylum.control
 				gameProxy.players.push(player);
 			}
 			// do stuff based on game's phase
-			if (gameProxy.gamePhase == GamePhase.GAME_SETUP) {
+			if (gameProxy.phase == GamePhase.GAME_SETUP) {
 				
-			} else if (gameProxy.gamePhase == GamePhase.WAITING_FOR_PLAYERS) {
+			} else if (gameProxy.phase == GamePhase.WAITING_FOR_PLAYERS) {
 				
-			} else if (gameProxy.gamePhase == GamePhase.PLAYING) {
+			} else if (gameProxy.phase == GamePhase.PLAYING) {
 				
 			}
 			sendNotification(NoteName.SET_LOADING_TEXT, "game loaded...");
