@@ -1,6 +1,7 @@
 package com.asylum.factory
 {
 	import com.asylum.data.AncientOne;
+	import com.asylum.data.BaseAbility;
 	import com.asylum.data.Config;
 	import com.asylum.data.Monster;
 	import com.asylum.data.MonsterAbility;
@@ -25,6 +26,14 @@ package com.asylum.factory
 			return boss;
 		}
 		
+		public static function makeMonsterAbility(xml:XML):MonsterAbility {
+			var monAbil:MonsterAbility = new MonsterAbility();
+			monAbil.id = xml.@id;
+			monAbil.title = xml..title;
+			monAbil.text = xml..text;
+			return monAbil;
+		}
+		
 		public static function makeMonster(xml:XML):Monster {
 			var mon:Monster = new Monster();
 			mon.id = parseFloat(xml.@id) as int;
@@ -37,13 +46,10 @@ package com.asylum.factory
 			mon.toughness = parseFloat(xml.@toughness) as int;
 			mon.combat = parseFloat(xml.@combat) as int;
 			mon.damage = parseFloat(xml.@damage) as int;
-			var abilities:XMLList = xml..abilities.ability;
-			var monAbil:MonsterAbility;
-			for each (var abilXML:XML in abilities) {
-				monAbil = new MonsterAbility();
-				monAbil.title = abilXML.@title;
-				monAbil.text = abilXML.toString();
-				mon.abilities.push(monAbil);
+			if (xml.child("special").length() > 0) {
+				var specialText:String = xml..special;
+				var specialAbil:BaseAbility = new BaseAbility("Special", specialText);
+				mon.abilities.push(specialAbil);
 			}
 			return mon;
 		}
@@ -68,6 +74,18 @@ package com.asylum.factory
 				}
 			}
 			return xml;
+		}
+		
+		public static function makeMonsterInstance(xml:XML):MonsterInstance {
+			var mon:MonsterInstance = new MonsterInstance();
+			mon.id = xml.@id;
+			mon.locationId = xml.@location;
+			if (xml.@trophy == "true") {
+				mon.isTrophy = true;
+			} else {
+				mon.isTrophy = false;
+			}
+			return mon;
 		}
 	}
 }

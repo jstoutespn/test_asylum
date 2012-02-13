@@ -1,14 +1,12 @@
 package com.asylum.data
 {
-	public class MonsterAbility
+	public class MonsterAbility extends BaseAbility
 	{
-		public var title:String;
-		public var text:String;
+		public var id:String;
 		
-		public function MonsterAbility(title:String = null, text:String = null)
+		public function MonsterAbility(title:String=null, text:String=null)
 		{
-			this.title = title;
-			this.text = text;
+			super(title, text);
 		}
 	}
 }

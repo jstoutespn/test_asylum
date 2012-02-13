@@ -93,9 +93,19 @@
 			public function set isSealed(value:Boolean):void
 			{
 				_isSealed = value;
-				sealedLabel.visible = _isSealed;
+				sealedLabel.visible = sealedLabel.includeInLayout = _isSealed;
 			}
 
+			public function get isClosed():Boolean
+			{
+				return _isClosed;
+			}
+			
+			public function set isClosed(value:Boolean):void
+			{
+				_isClosed = value;
+				closedLabel.visible = closedLabel.includeInLayout = _isClosed;
+			}
 			
 			private function onInit(event:FlexEvent):void
 			{
@@ -240,8 +250,7 @@
 					moveYAdjust = 0;
 					removeEventListener(MouseEvent.MOUSE_MOVE, onMoveLocation);
 				} */
-			}
-			
+			}			
 			
 		]]>
 	</fx:Script>
@@ -271,7 +280,8 @@
 					<s:SolidColorStroke color="#000000" weight="1" />
 				</s:stroke>
 			</s:Rect>
-			<s:Label id="sealedLabel" text="[sealed]" height="20" fontWeight="bold" verticalAlign="middle" visible="false" />
+			<s:Label id="sealedLabel" text="[sealed]" height="20" fontWeight="bold" verticalAlign="middle" visible="false" includeInLayout="false" />
+			<s:Label id="closedLabel" text="[closed]" height="20" fontWeight="bold" verticalAlign="middle" visible="false" includeInLayout="false" />
 		</s:HGroup>
 		<s:Label id="locationLabel" width="100%" fontFamily="Garamond" fontSize="24" text="{_locationName}"/>
 		<s:HGroup width="100%">

@@ -10,6 +10,9 @@ package com.asylum.cache
 	import flash.events.IEventDispatcher;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
+	import flash.system.LoaderContext;
+	import flash.system.SecurityDomain;
 	import flash.utils.Dictionary;
 	
 	public class ImageCache extends EventDispatcher
@@ -19,6 +22,7 @@ package com.asylum.cache
 		private var images:Dictionary;
 		private var loaders:Dictionary;
 		private var blacklist:Vector.<String>;
+		private var context:LoaderContext;
 		
 		public static function getInstance():ImageCache
 		{
@@ -28,7 +32,7 @@ package com.asylum.cache
 			return instance;
 		}
 		
-		public static function get instance():ImageCache
+		public static function get i():ImageCache
 		{
 			return getInstance();
 		}
@@ -38,6 +42,11 @@ package com.asylum.cache
 			images = new Dictionary();
 			loaders = new Dictionary();
 			blacklist = new Vector.<String>();
+			context = new LoaderContext();
+			context.allowCodeImport = false;
+			context.checkPolicyFile = false;
+			context.securityDomain = SecurityDomain.currentDomain;
+			context.applicationDomain = ApplicationDomain.currentDomain;
 			super(target);
 		}
 		
@@ -64,7 +73,7 @@ package com.asylum.cache
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageComplete);
 				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onImageError);
 				loaders[url] = loader;
-				loader.load(new URLRequest(url));
+				loader.load(new URLRequest(url), context);
 			}
 		}
 		
@@ -75,7 +84,7 @@ package com.asylum.cache
 			}
 		}
 		
-		public function removeListeners(onLoad:Function, onFail:Function = null) {
+		public function removeListeners(onLoad:Function, onFail:Function = null):void {
 			removeEventListener(ImageCacheEvent.URL_READY, onLoad);
 			if (onFail != null) {
 				removeEventListener(ImageCacheEvent.URL_FAILED, onFail);

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="960" minHeight="30">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.enum.NoteName;
+			import com.asylum.events.NoteEvent;
+			private var isReady:Boolean = false;
+			private var _value:int = 0;
+			private var _max:int;
+			private var icons:Vector.<DoomIcon>;
+			
+			public function get value():int
+			{
+				return _value;
+			}
+
+			public function set value(value:int):void
+			{
+				_value = value;
+				refresh();
+			}
+
+			public function get max():int
+			{
+				return _max;
+			}
+
+			public function set max(value:int):void
+			{
+				_max = value;
+				buildTrack();
+				refresh();
+			}
+
+			private function buildTrack():void {
+				clear();
+				var icon:DoomIcon;
+				var iconWidth:Number = (100/_max) * 0.95;
+				for (var d:int = 1; d<=_max; d++) {
+					icon = new DoomIcon();
+					icon.percentWidth = iconWidth;
+					icon.number = d;
+					icon.isDown = false;
+					icon.addEventListener(MouseEvent.CLICK, onClick, false, 0, true);
+					doomContainer.addElement(icon);
+					icons.push(icon);
+				}
+				isReady = true;
+				invalidateDisplayList();
+			}
+			
+			private function refresh():void {
+				if (isReady) {
+					for each (var icon:DoomIcon in icons) {
+						if (icon.number <= _value) {
+							icon.isDown = true;
+						} else {
+							icon.isDown = false;
+						}
+					}
+				}
+			}
+			
+			private function clear():void {
+				if (icons) {
+					for each (var icon:DoomIcon in icons) {
+						icon.removeEventListener(MouseEvent.CLICK, onClick);
+					}
+				}
+				doomContainer.removeAllElements();
+				icons = new Vector.<DoomIcon>();
+			}
+			
+			private function onClick(event:MouseEvent):void {
+				var icon:DoomIcon = event.target as DoomIcon;
+				dispatchEvent( new NoteEvent(NoteName.SET_DOOM_LEVEL, {doom:icon.number}) );
+			}
+
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout gap="4"/>
+	</s:layout>
+	<s:Label text="doom:" minHeight="20" fontFamily="Garamond" fontSize="24" fontWeight="bold" textAlign="left" verticalAlign="middle"/>
+	<s:HGroup id="doomContainer" width="100%"></s:HGroup>
+</s:Group>

@@ -22,6 +22,7 @@
 			public var locations:Array;
 			public var sublocations:Array;
 			public var worlds:Array;
+			public var subworlds:Array;
 			public var mapIndex:Dictionary;
 			
 			public function get allItems():Array {
@@ -33,8 +34,9 @@
 				streets = [northside, merchant, miskatonic, uptown, downtown, easttown, rivertown, frenchHill, southside];
 				locations = [newspaper, trainStation, curiosityShop, unvisited, unnameable, riverDocks, science, admin, library, hospital, magicShop, woods, bank, asylum, indsquare,
 							roadhouse, diner, police, graveyard, cave, generalStore, witchHouse, silverLodge, boardHouse, church, histSociety];
-				sublocations = [this.jail];
+				sublocations = [jail];
 				worlds = [];
+				subworlds = [];
 				
 				for each (var loc:ArkhamLocation in locations) {
 					connectLocationToStreet(loc);
@@ -42,12 +44,7 @@
 				for each (var subloc:ArkhamSubLocation in sublocations) {
 					connectSubToLocation(subloc);
 				}
-				backGraphics.invalidateDisplayList();
-				
-				var gate:Gate = new Gate();
-				gate.world = Locations.RLEYH; gate.symbol = MonsterSymbol.CROSS; gate.modifier = -3;
-				var gateInst:GateInstance = new GateInstance(gate);
-				unvisited.gate = gateInst;
+				backGraphics.invalidateDisplayList();				
 			}
 			
 			private function connectLocationToStreet(loc:ArkhamLocation):void {

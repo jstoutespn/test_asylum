@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 minHeight="20" buttonMode="true" mouseChildren="false" currentState="up">
+	<fx:Script>
+		<![CDATA[
+			private var _number:int;
+			private var _isDown:Boolean;
+			
+			public function get number():int
+			{
+				return _number;
+			}
+
+			public function set number(value:int):void
+			{
+				_number = value;
+				iconLabel.text = String(_number);
+			}
+
+			public function get isDown():Boolean
+			{
+				return _isDown;
+			}
+
+			public function set isDown(value:Boolean):void
+			{
+				_isDown = value;
+				if (_isDown) {
+					currentState = "down";
+				} else {
+					currentState = "up";
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="up" />
+		<s:State name="down" />
+	</s:states>
+	<s:Rect width="100%" height="100%" top="0" left="0">
+		<s:fill>
+			<s:SolidColor color.up="#FFFFFF" color.down="#FF0000" />
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#000000" weight="3" />
+		</s:stroke>
+	</s:Rect>
+	<s:HGroup width="100%" height="100%" top="0" left="0" paddingTop="5" paddingLeft="5" paddingRight="5" paddingBottom="5" verticalAlign="middle">
+		<s:Label id="iconLabel" text="##" textAlign="center" width="100%" height="100%" verticalAlign="middle" fontFamily="Garamond" fontSize="14" fontWeight="bold" />
+	</s:HGroup>
+</s:Group>

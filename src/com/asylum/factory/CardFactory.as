@@ -1,12 +1,13 @@
 package com.asylum.factory
 {
+	import com.asylum.data.Ally;
+	import com.asylum.data.CardInstance;
 	import com.asylum.data.Config;
 	import com.asylum.data.Gate;
 	import com.asylum.data.GateInstance;
 	import com.asylum.data.Item;
-	import com.asylum.data.ItemInstance;
 	import com.asylum.data.Skill;
-	import com.asylum.data.SkillInstance;
+	import com.asylum.data.Special;
 	import com.asylum.data.Spell;
 
 	public class CardFactory
@@ -22,11 +23,14 @@ package com.asylum.factory
 		}
 		
 		public static function makeItem(xml:XML):Item {
-			var item:Item = new Item();
+			var itemType:String = xml.@type;
+			var item:Item = new Item(itemType);
 			item.id = parseFloat(xml.@id);
-			item.type = xml.@type;
 			item.num = parseFloat(xml.@num) as int;
 			item.name = xml..name;
+			if (xml.child("image").length() > 0) {
+				item.imageUrl = xml..image;
+			}
 			if (xml.child("subtype").length() > 0) {
 				item.subType = xml..subtype;
 			}
@@ -43,17 +47,13 @@ package com.asylum.factory
 		public static function makeSpell(xml:XML):Spell {
 			var spell:Spell = new Spell();
 			spell.id = parseFloat(xml.@id);
-			spell.type = xml.@type;
 			spell.num = parseFloat(xml.@num) as int;
 			spell.name = xml..name;
-			if (xml.child("subtype").length() > 0) {
-				spell.subType = xml..subtype;
+			if (xml.child("image").length() > 0) {
+				spell.imageUrl = xml..image;
 			}
 			if (xml.child("hands").length() > 0) {
 				spell.hands = parseFloat(xml..hands) as int;
-			}
-			if (xml.child("price").length() > 0) {
-				spell.price = parseFloat(xml..price) as int;
 			}
 			spell.text = xml..text;
 			spell.castmod = parseFloat(xml.@modifier) as int;
@@ -70,18 +70,38 @@ package com.asylum.factory
 			return skill;
 		}
 		
+		public static function makeSpecial(xml:XML):Special {
+			var special:Special = new Special();
+			special.id = parseFloat(xml.@id) as int;
+			special.num = parseFloat(xml.@num) as int;
+			special.name = xml..name;
+			special.text = xml..text;
+			if (xml.child("image").length() > 0) {
+				special.imageUrl = xml..image;
+			}
+			return special;
+		}
+		
+		public static function makeAlly(xml:XML):Ally {
+			var ally:Ally = new Ally();
+			ally.id = parseFloat(xml.@id) as int;
+			ally.num = parseFloat(xml.@num) as int;
+			ally.name = xml..name;
+			ally.text = xml..text;
+			if (xml.child("image").length() > 0) {
+				ally.imageUrl = xml..image;
+			}
+			return ally;
+		}
+		
 		public static function getGateTokenId(gateId:int, gateNum:int):String {
 			return new String("gate_" + Config.i.gameId + "_" + gateId + "_" + gateNum);
 		}
 		
-		public static function getItemCardId(itemId:int, itemNum:int):String {
-			return new String("item_" + Config.i.gameId + "_" + itemId + "_" + itemNum);
+		public static function getCardInstanceId(type:String, sourceId:int, instanceNum:int):String {
+			return new String(type + "_" + Config.i.gameId + "_" + 	sourceId + "_" + instanceNum);
 		}
-		
-		public static function getSkillCardId(skillId:int, skillNum:int):String {
-			return new String("skill_" + Config.i.gameId + "_" + skillId + "_" + skillNum);
-		}
-		
+				
 		public static function getGateTokenXML(gate:GateInstance):XML {
 			var xml:XML = new XML("<gate></gate>");
 			xml.@id = gate.id;
@@ -100,30 +120,40 @@ package com.asylum.factory
 			return xml;
 		}
 		
-		public static function getItemCardXML(item:ItemInstance):XML {
+		public static function makeGateToken(xml:XML):GateInstance {
+			var gateToken:GateInstance = new GateInstance();
+			gateToken.id = xml.@id;
+			gateToken.locationId = xml.@location;
+			if (xml.@trophy == "true") {
+				gateToken.isTrophy = true;
+			} else {
+				gateToken.isTrophy = false;
+			}
+			return gateToken;
+		}
+		
+		public static function getCardInstanceXML(card:CardInstance):XML {
 			var xml:XML = new XML("<item></item>");
-			xml.@id = item.id;
-			xml.@source = item.source.id;
-			if (item.isInPlay) {
+			xml.@id = card.id;
+			xml.@source = card.source.id;
+			if (card.isInPlay) {
 				xml.@inplay = "true";
-				xml.@owner = item.owner.id;
+				xml.@owner = card.owner.id;
 			} else {
 				xml.@inplay = "false";
 			}
 			return xml;
 		}
 		
-		public static function getSkillCardXML(skill:SkillInstance):XML {
-			var xml:XML = new XML("<skill></skill>");
-			xml.@id = skill.id;
-			xml.@source = skill.source.id;
-			if (skill.isInPlay) {
-				xml.@inplay = "true";
-				xml.@owner = skill.owner.id;
+		public static function makeCardInstance(xml:XML):CardInstance {
+			var card:CardInstance = new CardInstance();
+			card.id = xml.@id;
+			if (xml.@inplay == "true") {
+				card.isInPlay = true;
 			} else {
-				xml.@inplay = "false";
+				card.isInPlay = false;
 			}
-			return xml;
+			return card;
 		}
 	}
 }

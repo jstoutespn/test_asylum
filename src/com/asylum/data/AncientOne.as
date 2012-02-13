@@ -8,7 +8,7 @@ package com.asylum.data
 		public var defenses:String;
 		public var doom:int;
 		public var worshippers:String;
-		public var power:MonsterAbility;
+		public var power:BaseAbility;
 		public var startBattleText:String;
 		public var attack:String;
 		
@@ -20,7 +20,7 @@ package com.asylum.data
 			worshippers = "";
 			startBattleText = "";
 			attack = "";
-			power = new MonsterAbility();
+			power = new BaseAbility();
 		}
 	}
 }

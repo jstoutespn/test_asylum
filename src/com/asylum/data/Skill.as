@@ -1,10 +1,10 @@
 package com.asylum.data
 {
-	public class Skill
+	public class Skill extends Card
 	{
-		public var id:int;
-		public var name:String;
-		public var num:int;
-		public var text:String;
+		public function Skill()
+		{
+			super("skill");
+		}
 	}
 }

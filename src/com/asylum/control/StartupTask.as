@@ -15,7 +15,7 @@ package com.asylum.control
 			startupProxy = facade.retrieveProxy(StartupProxy.NAME) as StartupProxy;
 		}
 		
-		public function complete(task:Class):void {
+		protected function complete(task:Class):void {
 			startupProxy.registerTaskComplete(task);
 		}
 	}

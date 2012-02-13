@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<monsters>
-	<monster id="0" num="5" symbol="star" movement="flying" awareness="0" horror="0" sandamage="0" toughness="1" combat="-2" damage="2">
-		<name>Fire Vampire</name>
-		<abilities>
-			<ability title="Ambush"><![CDATA[Once combat has begun with this creature, the investigator no longer has the option to flee it, but must instead fight until one or the other is defeated.]]></ability>
-			<ability title="Physical Immunity"><![CDATA[A Weapon or Spell that adds a physical bonus provides none of its normal bonus against monsters with physical immunity.]]></ability>
-		</abilities>
-	</monster>
-</monsters>
+<monsterdata>
+	<monsters>
+		<monster id="0" num="5" symbol="star" movement="flying" awareness="0" horror="0" sandamage="0" toughness="1" combat="-2" damage="2">
+			<name>Fire Vampire</name>
+			<abilities>
+				<ability id="ambush" />
+				<ability id="physicalim" />
+			</abilities>
+		</monster>
+	</monsters>
+	<abilities>
+		<ability id="ambush">
+			<title><![CDATA[Ambush]]></title>
+			<text><![CDATA[Once combat has begun with this creature, the investigator no longer has the option to flee it, but must instead fight until one or the other is defeated.]]></text>
+		</ability>
+		<ability id="physicalim">
+			<title><![CDATA[Physical Immunity]]></title>
+			<text><![CDATA[A Weapon or Spell that adds a physical bonus provides none of its normal bonus against monsters with physical immunity.]]></text>
+		</ability>
+		<ability id="endless">
+			<title>Endless</title>
+			<text><![CDATA[A monster with this ability cannot be collected as a monster trophy. Instead, each time it is defeated, return it to the cup.]]></text>
+		</ability>
+		<ability id="magicalim">
+			<title>Magical Immunity</title>
+			<text><![CDATA[A Weapon or Spell that adds a magical bonus provides none of its normal bonus against monsters with magical immunity.]]></text>
+		</ability>
+		<ability id="magicresist">
+			<title>Magical Resistance</title>
+			<text><![CDATA[A Weapon or Spell that adds a magical bonus can only provide half its normal bonus (rounded up) against monsters with Magical Resistance.]]></text>
+		</ability>
+		<ability id="physicalresist">
+			<title>Physical Resistance</title>
+			<text><![CDATA[A Weapon or Spell that adds a physical bonus can only provide half its normal bonus (rounded up) against monsters with Physical Resistance.]]></text>
+		</ability>
+		<ability id="weaponim">
+			<title>Weapon Immunity</title>
+			<text><![CDATA[A Weapon that adds a bonus to combat provides none of its normal bonus. Spells are not affected.]]></text>
+		</ability>
+		<ability id="nightmare1">
+			<title><![CDATA[Nightmarish 1]]></title>
+			<text><![CDATA[Any investigator that passes a Horror check when facing this monster still loses 1 Sanity. This ability doesn’t apply if the investigator fails the Horror check.]]></text>
+		</ability>
+		<ability id="nightmare2">
+			<title><![CDATA[Nightmarish 2]]></title>
+			<text><![CDATA[Any investigator that passes a Horror check when facing this monster still loses 2 Sanity. This ability doesn’t apply if the investigator fails the Horror check.]]></text>
+		</ability>
+		<ability id="nightmare3">
+			<title><![CDATA[Nightmarish 3]]></title>
+			<text><![CDATA[Any investigator that passes a Horror check when facing this monster still loses 3 Sanity. This ability doesn’t apply if the investigator fails the Horror check.]]></text>
+		</ability>
+		<ability id="overwhelm1">
+			<title><![CDATA[Overwhelming 1]]></title>
+			<text><![CDATA[Any investigator that defeats this monster in combat still loses 1 Stamina. This ability doesn’t apply when the investigator fails his Combat check against the monster.]]></text>
+		</ability>
+		<ability id="overwhelm2">
+			<title><![CDATA[Overwhelming 2]]></title>
+			<text><![CDATA[Any investigator that defeats this monster in combat still loses 2 Stamina. This ability doesn’t apply when the investigator fails his Combat check against the monster.]]></text>
+		</ability>
+		<ability id="overwhelm3">
+			<title><![CDATA[Overwhelming 3]]></title>
+			<text><![CDATA[Any investigator that defeats this monster in combat still loses 3 Stamina. This ability doesn’t apply when the investigator fails his Combat check against the monster.]]></text>
+		</ability>
+	</abilities>
+</monsterdata>

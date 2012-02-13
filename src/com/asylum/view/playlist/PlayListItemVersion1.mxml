@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Player;
+			
+			override public function set data(value:Object):void {
+				super.data = value;
+				playerName.text = (data as Player).name;
+				if ( (data as Player).isCurrentTurn == true ) {
+					currentState = "current";
+				} else {
+					currentState = "normal";
+				}
+				firstPlayerIndicator.visible = (data as Player).isFirstPlayer;
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="current" />
+	</s:states>
+	<s:Group width="100%" height="100%">
+		<s:Rect top="0" left="0" right="0" bottom="0">
+			<s:fill>
+				<s:SolidColor color.normal="#FFFFFF" color.current="#000000" />
+			</s:fill>
+		</s:Rect>
+		<s:HGroup top="0" left="0" right="0" bottom="0">
+			<s:Label id="playerName" width="100%" color.normal="#000000" color.current="#FFFFFF" />
+			<s:Label id="firstPlayerIndicator" width="10" text="[1]" color.normal="#e6e600" color.current="#ffff00" visible="false" />
+		</s:HGroup>
+	</s:Group>	
+</s:ItemRenderer>

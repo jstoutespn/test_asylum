@@ -11,14 +11,14 @@ package com.asylum.data
 		private var _imageUrl:String;
 		public var isMe:Boolean;
 		public var isFirstPlayer:Boolean;
+		public var isCurrentTurn:Boolean;
 		public var order:int;
 		public var characterId:int;
 		public var character:Character;
-		public var locationId:String;
+		private var _locationId:String;
 		private var _location:ILocation;
-		public var inventory:Vector.<ItemInstance>;
+		public var inventory:Vector.<CardInstance>;
 		public var trophies:Vector.<ITrophy>;
-		public var skills:Vector.<SkillInstance>;
 		
 		public function Player()
 		{
@@ -26,15 +26,15 @@ package com.asylum.data
 			order = -1;
 			isMe = false;
 			isFirstPlayer = false;
-			locationId = "";
-			inventory = new Vector.<ItemInstance>();
+			isCurrentTurn = false;
+			_locationId = "";
+			inventory = new Vector.<CardInstance>();
 			trophies = new Vector.<ITrophy>();
-			skills = new Vector.<SkillInstance>();
 		}
-		
+				
 		public function get label():String 
 		{
-			return name;
+			return firstName;
 		}
 		
 		public function get imageUrl():String
@@ -56,5 +56,16 @@ package com.asylum.data
 		{
 			_location = value;
 		}
+
+		public function get locationId():String
+		{
+			return _locationId;
+		}
+
+		public function set locationId(value:String):void
+		{
+			_locationId = value;
+		}
+
 	}
 }

@@ -2,17 +2,17 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				autoDrawBackground="true"
+				xmlns:map="com.asylum.view.map.*"
+				autoDrawBackground="false"
 				width="62" height="100%" maxHeight="117"
-				alpha.normal="1" alpha.selected="1" alpha.dragging="0.8">
+				alpha.normal="1" alpha.selected="1" alpha.dragging="0.8" >
 	<fx:Script>
 		<![CDATA[
 			import com.asylum.data.IMiniature;
 			
 			override public function set data(value:Object):void {
 				super.data = value;
-				miniImage.source = miniature.imageUrl;
-				miniLabel.text = miniature.label;
+				miniatureView.miniature = this.miniature;
 			}
 			
 			public function get miniature():IMiniature {
@@ -35,9 +35,5 @@
 			<s:SolidColor color.normal="#FFFFFF" color.selected="#FFFFFF" color.hovered="#999999" />
 		</s:fill>
 	</s:Rect>
-	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="4" paddingRight="8" paddingLeft="4" paddingBottom="8" gap="5" horizontalAlign="center" verticalAlign="middle">
-		<s:Image id="miniImage" width="50" height="50" />
-		<s:Label id="miniLabel" width="50" height="100%" fontFamily="Verdana" fontSize="10"
-				 fontWeight="bold" textAlign="center" text="" />
-	</s:VGroup>
+	<map:MiniatureView id="miniatureView" x="0" y="0" />
 </s:ItemRenderer>

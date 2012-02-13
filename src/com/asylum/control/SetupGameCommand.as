@@ -1,15 +1,17 @@
 package com.asylum.control
 {
+	import com.asylum.data.Ally;
+	import com.asylum.data.Card;
+	import com.asylum.data.CardInstance;
 	import com.asylum.data.Config;
 	import com.asylum.data.Gate;
 	import com.asylum.data.GateInstance;
 	import com.asylum.data.Item;
-	import com.asylum.data.ItemInstance;
 	import com.asylum.data.LocationState;
 	import com.asylum.data.Monster;
 	import com.asylum.data.MonsterInstance;
 	import com.asylum.data.Skill;
-	import com.asylum.data.SkillInstance;
+	import com.asylum.data.Special;
 	import com.asylum.data.Spell;
 	import com.asylum.data.enum.ApplicationScreen;
 	import com.asylum.data.enum.GamePhase;
@@ -76,49 +78,58 @@ package com.asylum.control
 				}
 			}
 			
-			// set up items
-			var itemsXML:XML = new XML("<items></items>");
-			var itemXML:XML;
-			var itemCards:Vector.<ItemInstance>;
+			// set up cards
+			var cardsXML:XML = new XML("<cards></cards>");
+			var cardXML:XML;
+			var cardlist:Vector.<CardInstance>;
 			for each (var common:Item in sourceProxy.commonItems) {
-				itemCards = getItemInstances(common);
-				for each (var commonCard:ItemInstance in itemCards) {
+				cardlist = getCardInstances(common);
+				for each (var commonCard:CardInstance in cardlist) {
 					gameProxy.commonItemDeck.push(commonCard);
-					itemXML = CardFactory.getItemCardXML(commonCard);
-					itemsXML.appendChild(itemXML);
+					cardXML = CardFactory.getCardInstanceXML(commonCard);
+					cardsXML.appendChild(cardXML);
 				}
 			}
 			for each (var unique:Item in sourceProxy.uniqueItems) {
-				itemCards = getItemInstances(unique);
-				for each (var uniqueCard:ItemInstance in itemCards) {
+				cardlist = getCardInstances(unique);
+				for each (var uniqueCard:CardInstance in cardlist) {
 					gameProxy.uniqueItemDeck.push(uniqueCard);
-					itemXML = CardFactory.getItemCardXML(uniqueCard);
-					itemsXML.appendChild(itemXML);
+					cardXML = CardFactory.getCardInstanceXML(uniqueCard);
+					cardsXML.appendChild(cardXML);
 				}
 			}
 			for each (var spell:Spell in sourceProxy.spells) {
-				itemCards = getItemInstances(spell);
-				for each (var spellCard:ItemInstance in itemCards) {
+				cardlist = getCardInstances(spell);
+				for each (var spellCard:CardInstance in cardlist) {
 					gameProxy.spellDeck.push(spellCard);
-					itemXML = CardFactory.getItemCardXML(spellCard);
-					itemsXML.appendChild(itemXML);
+					cardXML = CardFactory.getCardInstanceXML(spellCard);
+					cardsXML.appendChild(cardXML);
 				}
 			}
-			
-			// set up skills
-			var skillsXML:XML = new XML("<skills></skills>");
-			var skillCard:SkillInstance;
-			var skillXML:XML;
 			for each (var skill:Skill in sourceProxy.skills) {
-				count = skill.num;
-				for (var s:int = 0; s<count; s++) {
-					skillCard = new SkillInstance(skill);
-					skillCard.id = CardFactory.getSkillCardId(skill.id, s);
-					skillXML = CardFactory.getSkillCardXML(skillCard);
-					skillsXML.appendChild(skillXML);
+				cardlist = getCardInstances(skill);
+				for each (var skillCard:CardInstance in cardlist) {
+					gameProxy.skillDeck.push(skillCard);
+					cardXML = CardFactory.getCardInstanceXML(skillCard);
+					cardsXML.appendChild(cardXML);
 				}
 			}
-			
+			for each (var special:Special in sourceProxy.specials) {
+				cardlist = getCardInstances(special);
+				for each (var cardInst:CardInstance in cardlist) {
+					gameProxy.specialDeck.push(cardInst);
+					cardXML = CardFactory.getCardInstanceXML(cardInst);
+					cardsXML.appendChild(cardXML);
+				}
+			}
+			for each (var ally:Ally in sourceProxy.allies) {
+				cardlist = getCardInstances(ally);
+				for each (var allyCard:CardInstance in cardlist) {
+					gameProxy.allyDeck.push(allyCard);
+					cardXML = CardFactory.getCardInstanceXML(allyCard);
+					cardsXML.appendChild(cardXML);
+				}
+			}			
 			// set up locations
 			var locationsXML:XML = new XML("<locations></locations>");
 			var locState:LocationState;
@@ -133,14 +144,14 @@ package com.asylum.control
 			
 			// send to server
 			var args:Object = {'boss':gameProxy.boss.id, 'doom':gameProxy.doomTrack, 'terror':gameProxy.terrorTrack, 'monsters':monstersXML.toXMLString(),
-								'gates':gatesXML.toXMLString(), 'items':itemsXML.toXMLString(), 'skills':skillsXML.toXMLString(), 'locations':locationsXML.toXMLString(),
-								'log':"set up the game"};
+								'gates':gatesXML.toXMLString(), 'cards':cardsXML.toXMLString(), 'locations':locationsXML.toXMLString(), 'log':"set up the game"};
 			var service:XMLService = new XMLService(Config.i.gameURL, onResult, onFault);
 			service.load(NoteName.SETUP_GAME, args);
 		}
 		
 		private function onResult(xml:XML):void {
 			gameProxy.phase = GamePhase.WAITING_FOR_PLAYERS;
+			sendNotification(NoteName.UPDATE_GAME_VIEW, {isFirstTime:true});
 			sendNotification(NoteName.SET_SCREEN, {screen:ApplicationScreen.PLAYING});
 		}
 		
@@ -148,14 +159,14 @@ package com.asylum.control
 			trace("i gotta fault");
 		}
 		
-		private function getItemInstances(item:Item):Vector.<ItemInstance> {
-			var count:int = item.num;
-			var list:Vector.<ItemInstance> = new Vector.<ItemInstance>();
-			var itemCard:ItemInstance;
+		private function getCardInstances(card:Card):Vector.<CardInstance> {
+			var count:int = card.num;
+			var list:Vector.<CardInstance> = new Vector.<CardInstance>();
+			var cardInstance:CardInstance;
 			for (var i:int = 0; i<count; i++) {
-				itemCard = new ItemInstance(item);
-				itemCard.id = CardFactory.getItemCardId(item.id, i);
-				list.push(itemCard);
+				cardInstance = new CardInstance(card);
+				cardInstance.id = CardFactory.getCardInstanceId(card.type, card.id, i);
+				list.push(cardInstance);
 			}
 			return list;
 		}

@@ -39,12 +39,12 @@ package com.asylum.factory
 			if (xml..fixed.clue) {
 				char.clues = parseFloat(xml..fixed.clue) as int;
 			}
-			var itemList:XMLList = xml..fixed.item;
-			if (itemList.length() > 0) {
+			var cardList:XMLList = xml..fixed.card;
+			if (cardList.length() > 0) {
 				var fixedItem:int;
-				for each (var itemXML:XML in itemList) {
+				for each (var itemXML:XML in cardList) {
 					fixedItem = parseFloat(itemXML.@id) as int;
-					char.startItems.push(fixedItem);
+					char.startCards.push(fixedItem);
 				}
 			}
 			
@@ -63,19 +63,7 @@ package com.asylum.factory
 					char.randomDraw.spells = parseFloat(xml..gear.random.spells.@num) as int;
 				}
 			}
-			
-			// check for statuses
-			var statusCards:XMLList = xml..gear.fixed.status;
-			if (statusCards.length() > 0) {
-				for each (var statusCard:XML in statusCards) {
-					if (statusCard.@id == "blessing") {
-						char.blessed = true;
-					} else if (statusCard.@id == "cursed") {
-						char.cursed = true;
-					}
-				}
-			}
-			
+						
 			return char;
 		}
 	}

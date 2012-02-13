@@ -6,14 +6,16 @@ package com.asylum.data
 	{
 		public var id:String;
 		public var source:Gate;
-		public var location:ILocation;
+		private var _locationId:String;
+		private var _location:ILocation;
 		private var _isTrophy:Boolean;
 		private var _claimant:Player;
 		
-		public function GateInstance(gate:Gate)
+		public function GateInstance(gate:Gate = null)
 		{
 			source = gate;
 			_isTrophy = false;
+			locationId = "";
 		}
 
 		public function get isTrophy():Boolean
@@ -35,5 +37,26 @@ package com.asylum.data
 		{
 			_claimant = value;
 		}
+
+		public function get locationId():String
+		{
+			return _locationId;
+		}
+
+		public function set locationId(value:String):void
+		{
+			_locationId = value;
+		}
+
+		public function get location():ILocation
+		{
+			return _location;
+		}
+
+		public function set location(value:ILocation):void
+		{
+			_location = value;
+		}
+
 	}
 }

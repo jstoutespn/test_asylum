@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  initialize="onInit(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			[Bindable] public var dataProvider:ArrayCollection;
+			[Bindable] public var currentPhase:String;
+			
+			private function onInit(event:FlexEvent):void
+			{
+				dataProvider = new ArrayCollection();
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%" top="0" left="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#333333" weight="1" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10">
+		<s:HGroup width="100%">
+			<s:Label text="Current Phase:" fontFamily="Garamond" fontSize="18" fontStyle="italic" />
+			<s:Label id="currentPhaseText" text="{currentPhase}" fontFamily="Garamond" fontSize="18" fontWeight="bold" />
+		</s:HGroup>
+		<s:HGroup width="100%" height="100%" horizontalAlign="center" paddingTop="5" paddingLeft="5" paddingRight="5" paddingBottom="5">
+			<s:List id="playList" width="100%" height="100%" verticalScrollPolicy="auto" horizontalScrollPolicy="off" 
+					dataProvider="{this.dataProvider}" itemRenderer="com.asylum.view.playlist.PlayListItem">
+			</s:List>
+		</s:HGroup>
+		<s:HGroup width="100%" horizontalAlign="right" paddingLeft="5" paddingRight="5">
+			<s:Button id="nextBtn" label="Next &gt;" width="100" height="40" />
+		</s:HGroup>
+	</s:VGroup>
+</s:Group>

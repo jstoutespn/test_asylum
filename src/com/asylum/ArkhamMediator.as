@@ -4,7 +4,10 @@ package com.asylum
 	import com.asylum.data.enum.NoteName;
 	import com.asylum.mediator.BaseMediator;
 	import com.asylum.view.ancient.AncientMediator;
+	import com.asylum.view.doom.DoomMediator;
 	import com.asylum.view.map.MapMediator;
+	import com.asylum.view.playlist.PlayListMediator;
+	import com.asylum.view.terror.TerrorMediator;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	
@@ -27,6 +30,9 @@ package com.asylum
 		{
 			facade.registerMediator(new AncientMediator(view.ancientScreen));
 			facade.registerMediator(new MapMediator(view.gameMap));
+			facade.registerMediator(new TerrorMediator(view.terrorTrack));
+			facade.registerMediator(new DoomMediator(view.doomTrack));
+			facade.registerMediator(new PlayListMediator(view.playList));
 		}
 		
 		private function onSetScreen(note:INotification):void {

@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:map="com.asylum.view.map.*"
-			   currentState="initial" creationComplete="onCreated(event)" xmlns:ancient="com.asylum.view.ancient.*">	
+			   currentState="initial" creationComplete="onCreated(event)" xmlns:ancient="com.asylum.view.ancient.*" xmlns:terror="com.asylum.view.terror.*" xmlns:doom="com.asylum.view.doom.*" xmlns:playlist="com.asylum.view.playlist.*">	
 	<fx:Style source="Arkham.css"/>
 	<fx:Script>
 		<![CDATA[
@@ -49,11 +49,18 @@
 		<s:State name="loading"/>
 		<s:State name="bossSelect" />
 	</s:states>
-	<s:Scroller width="100%" height="100%" x="0" y="0">
-		<s:Group>
-			<map:GameMap id="gameMap" />
-		</s:Group>
-	</s:Scroller>
+	<s:VGroup width="100%" height="100%" x="0" y="0">
+		<s:HGroup width="100%" height="33%">
+			<playlist:PlayList id="playList" width="33%" height="100%" />
+		</s:HGroup>
+		<s:Scroller id="mapContainer" width="100%" height="100%" top="0" left="0">
+			<s:Group>
+				<map:GameMap id="gameMap" />
+			</s:Group>
+		</s:Scroller>
+		<doom:DoomTrack id="doomTrack" width="100%" />
+		<terror:TerrorTrack id="terrorTrack" width="100%" />
+	</s:VGroup>
 	<ancient:AncientScreen id="ancientScreen" includeIn="initial,bossSelect" width="100%" height="100%" x="0" y="0" />
 	<s:Group id="loadScreen" includeIn="initial,loading" width="100%" height="100%" x="0" y="0">
 		<s:Rect width="100%" height="100%" x="0" y="0">

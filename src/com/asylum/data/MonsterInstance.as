@@ -6,16 +6,18 @@ package com.asylum.data
 	{
 		public var id:String;
 		public var source:Monster;
+		private var _locationId:String;
 		private var _location:ILocation;
 		private var _isTrophy:Boolean;
 		private var _claimant:Player;
 		
-		public function MonsterInstance(monster:Monster)
+		public function MonsterInstance(monster:Monster = null)
 		{
 			this.source = monster;
 			_isTrophy = false;
+			_locationId = "";
 		}
-		
+				
 		public function get label():String
 		{
 			return source.name;
@@ -26,6 +28,16 @@ package com.asylum.data
 			return source.imageUrl;
 		}
 		
+		public function get locationId():String
+		{
+			return _locationId;
+		}
+		
+		public function set locationId(value:String):void
+		{
+			_locationId = value;
+		}
+
 		public function get location():ILocation
 		{
 			return _location;
@@ -55,5 +67,6 @@ package com.asylum.data
 		{
 			_claimant = value;
 		}
+
 	}
 }

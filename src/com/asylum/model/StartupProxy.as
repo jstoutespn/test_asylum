@@ -29,6 +29,14 @@ package com.asylum.model
 			}
 			return false;
 		}
+		
+		public function isTaskComplete(task:Class):Boolean {
+			if (taskIndex[task] != null) {
+				return taskIndex[task] as Boolean;
+			}
+			return false;
+		}
+		
 		public function registerTask(task:Class):void {
 			taskIndex[task] = false;
 		}

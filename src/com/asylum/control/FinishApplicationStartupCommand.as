@@ -20,6 +20,7 @@ package com.asylum.control
 			if (gameProxy.phase == GamePhase.GAME_SETUP) {
 				sendNotification(NoteName.SET_SCREEN, {screen:ApplicationScreen.BOSS_SELECT});
 			} else if (gameProxy.phase == GamePhase.WAITING_FOR_PLAYERS || gameProxy.phase == GamePhase.PLAYING) {
+				sendNotification(NoteName.UPDATE_GAME_VIEW, {isFirstTime:true});
 				sendNotification(NoteName.SET_SCREEN, {screen:ApplicationScreen.PLAYING});
 			}
 		}

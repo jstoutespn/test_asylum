@@ -1,15 +1,15 @@
 package com.asylum.data
 {
-	public class SkillInstance
+	public class CardInstance
 	{
 		public var id:String;
-		public var source:Skill;
+		public var source:Card;
 		public var isInPlay:Boolean;
 		public var owner:Player;
 		
-		public function SkillInstance(skill:Skill = null)
+		public function CardInstance(card:Card = null)
 		{
-			source = skill;
+			source = card;
 			isInPlay = false;
 		}
 	}

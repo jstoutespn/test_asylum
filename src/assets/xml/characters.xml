@@ -133,7 +133,7 @@
       <fixed>
 	  	<cash>8</cash>
 		<clue>3</clue>
-		<item id="1" />
+		<card id="1" />
 	  </fixed>
       <random>
         <commonItems num="2"/>
@@ -159,9 +159,9 @@
 	</unique>
     <gear>
       <fixed>
-	  	<status id="blessing" />
-		<item id="11" />
-		<item id="12" />
+		<card id="11" />
+		<card id="12" />
+		<card id="16" />
 	  </fixed>
       <random>
         <spells num="2"/>
@@ -189,7 +189,7 @@
       <fixed>
 	  	<cash>4</cash>
 		<clue>1</clue>
-		<special id="Retainer" />
+		<card id="17" />
 	  </fixed>
       <random>
         <commonItems num="1"/>
@@ -217,7 +217,7 @@
     <gear>
       <fixed>
 	  	<cash>5</cash>
-		<item id="6" />
+		<card id="6" />
 	  </fixed>
       <random>
         <commonItems num="1"/>

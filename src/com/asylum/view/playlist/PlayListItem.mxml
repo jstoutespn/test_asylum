@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Player;
+			
+			override public function set data(value:Object):void {
+				super.data = value;
+				if (data is Player) {
+					var player:Player = data as Player;
+					playerName.text = player.name;
+					if (player.isCurrentTurn) {
+						currentMarker.visible = currentMarker.includeInLayout = true;
+						playerName.setStyle("fontWeight","bold");
+					} else {
+						currentMarker.visible = currentMarker.includeInLayout = false;
+					}
+					firstPlayerMarker.visible = firstPlayerMarker.includeInLayout = player.isFirstPlayer;
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="baseline" paddingTop="5" paddingLeft="5" paddingRight="5" paddingBottom="5" />
+	</s:layout>
+	<s:Path id="currentMarker" data="M0 0 10 5 0 10 0 0Z" visible="false" includeInLayout="false">
+		<s:fill>
+			<s:SolidColor color="#841618" />
+		</s:fill>
+	</s:Path>
+	<s:Label id="playerName" text="" fontSize="14" />
+	<s:Rect id="firstPlayerMarker" width="10" height="10" visible="false" includeInLayout="false">
+		<s:fill>
+			<s:SolidColor color="#297770" />
+		</s:fill>
+	</s:Rect>
+	<!-- <s:Path  data="M5 0 0 10 10 10 5 0Z" visible="false" includeInLayout="false">
+		<s:fill>
+			<s:SolidColor color="#297770" />
+		</s:fill>
+	</s:Path> -->
+</s:ItemRenderer>

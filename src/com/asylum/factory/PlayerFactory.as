@@ -27,6 +27,9 @@ package com.asylum.factory
 			if ( xml.hasOwnProperty("@firstPlayer") && xml.@firstPlayer == "true" ) {
 				player.isFirstPlayer = true;
 			}
+			if ( xml.hasOwnProperty("@current") && xml.@current == "true") {
+				player.isCurrentTurn = true;
+			}
 			return player;
 		}
 	}

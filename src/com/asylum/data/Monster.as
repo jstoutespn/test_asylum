@@ -13,12 +13,12 @@ package com.asylum.data
 		public var horror:int;
 		public var sanDamage:int;
 		public var toughness:int;
-		public var abilities:Vector.<MonsterAbility>;
+		public var abilities:Vector.<BaseAbility>;
 		public var imageUrl:String;
 		
 		public function Monster()
 		{
-			abilities = new Vector.<MonsterAbility>();
+			abilities = new Vector.<BaseAbility>();
 		}
 	}
 }

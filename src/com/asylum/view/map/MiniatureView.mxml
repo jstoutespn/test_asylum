@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%" height="100%" minWidth="50" minHeight="50"
+		 currentState="image">
+	<s:states>
+		<s:State name="image" />
+		<s:State name="noimage" />
+	</s:states>
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.cache.ImageCache;
+			import com.asylum.data.IMiniature;
+			import com.asylum.events.ImageCacheEvent;
+			
+			private var _miniature:IMiniature;
+			[Bindable] private var label:String;
+			
+			public function get miniature():IMiniature
+			{
+				return _miniature;
+			}
+
+			public function set miniature(value:IMiniature):void
+			{
+				_miniature = value;
+				label = _miniature.label;
+				if (_miniature.imageUrl != null && _miniature.imageUrl != "") {
+					currentState = "image";
+					if (ImageCache.i.hasUrl(_miniature.imageUrl)) {
+						miniImage.source = ImageCache.i.getUrl(_miniature.imageUrl);
+					} else {
+						ImageCache.i.addListeners(onImageReady, onImageFail);
+						ImageCache.i.requestUrl(_miniature.imageUrl);
+					}
+				} else {
+					currentState = "noimage";
+				}
+			}
+			
+			private function onImageReady(event:ImageCacheEvent):void {
+				if (event.url == _miniature.imageUrl) {
+					miniImage.source = ImageCache.i.getUrl(_miniature.imageUrl);
+				}
+			}
+			
+			private function onImageFail(event:ImageCacheEvent):void {
+				if (event.url == _miniature.imageUrl) {
+					currentState = "noimage";
+					ImageCache.i.removeListeners(onImageReady, onImageFail);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:VGroup id="imageLayoutContainer" includeIn="image" width="100%" height="100%" x="0" y="0" paddingTop="4" paddingRight="8" paddingLeft="4" paddingBottom="8" gap="5" 
+			  horizontalAlign="center" verticalAlign="middle">
+		<s:BitmapImage id="miniImage" width="50" height="50" />
+		<s:Label id="miniLabel" width="50" height="100%" fontFamily="Verdana" fontSize="10"
+				 fontWeight="bold" textAlign="center" text="{label}" />
+	</s:VGroup>
+	<s:Group id="monsterContainer" includeIn="noimage" width="100%" height="100%" x="0" y="0">
+		<s:VGroup width="100%" height="100%" x="0" y="0" paddingLeft="4" paddingRight="8" verticalAlign="middle">
+			<s:Label id="noImageLabel" width="100%" fontFamily="Verdana" fontSize="12" fontWeight="bold" textAlign="left" text="{label}" />
+		</s:VGroup>
+	</s:Group>
+</s:Group>

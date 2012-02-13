@@ -20,12 +20,11 @@
 					invalidateDisplayList();
 				}
 				super.commitProperties();
-			}			
+			}
 		]]>
 	</fx:Script>
 	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="10" paddingRight="10" paddingLeft="10" paddingBottom="10" gap="10">
-		<s:SkinnableDataContainer id="containerContent" width="100%" height="100%" maxHeight="137" itemRenderer="com.asylum.view.map.MiniatureItem"
-								  dataProvider="{dataProvider}">
+		<s:SkinnableDataContainer id="contentContainer" width="100%" height="100%" maxHeight="137" itemRenderer="com.asylum.view.map.MiniatureItem" dataProvider="{dataProvider}">
 			<s:layout>
 				<s:HorizontalLayout />
 			</s:layout>

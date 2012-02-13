@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:terror="com.asylum.view.terror.*" 
+		 minWidth="960" minHeight="40"
+		 creationComplete="onCreated(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.enum.NoteName;
+			import com.asylum.events.NoteEvent;
+			
+			import mx.events.FlexEvent;
+			
+			private var _level:int;
+			private var icons:Array;
+			private var isReady:Boolean = false;
+			
+			private function onCreated(event:FlexEvent):void
+			{
+				_level = 0;
+				icons = [one, two, three, four, five, six, seven, eight, nine, ten];
+			}
+			
+			private function onClick(event:MouseEvent):void
+			{
+				var icon:TerrorIcon = event.target as TerrorIcon;
+				dispatchEvent( new NoteEvent(NoteName.SET_TERROR_LEVEL, {terror:icon.index}) );
+			}
+
+			public function get level():int
+			{
+				return _level;
+			}
+
+			public function set level(value:int):void
+			{
+				_level = value;
+				refresh();
+			}
+						
+			private function refresh():void {
+				for each (var icon:TerrorIcon in icons) {
+					if (icon.index > -1 && icon.index <= _level) {
+						icon.isActive = true;
+					} else {
+						icon.isActive = false;
+					}
+				}
+			}
+			
+	]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout gap="4" />
+	</s:layout>
+	<s:Label maxWidth="84" minHeight="20" fontFamily="Garamond" fontSize="24"
+			 fontWeight="bold" text="terror:" textAlign="left" verticalAlign="middle"/>
+	<terror:TerrorIcon id="one" index="1" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="two" index="2" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="three" index="3" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="four" index="4" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="five" index="5" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="six" index="6" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="seven" index="7" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="eight" index="8" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="nine" index="9" width="9%" click="onClick(event)"/>
+	<terror:TerrorIcon id="ten" index="10" width="9%" click="onClick(event)"/>
+</s:Group>

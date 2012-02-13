@@ -1,65 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<game id="1" phase="setup" updated="" boss="" doom="" terror="">
+<game id="1" phase="waiting" updated="1" boss="3" doom="2" terror="1">
 	<players>
-		<player id="14400053" name="Jon Stout" firstName="Jon" lastName="Stout" imageUrl="http://graph.facebook.com/14400053/picture" character="-1" order="-1" location="" firstPlayer="false" />
-		<player id="28501798" name="Ryan Lucas" firstName="Ryan" lastName="Lucas" imageUrl="http://graph.facebook.com/28501798/picture" />
-		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" />
+		<player id="14400053" name="Jon Stout" firstName="Jon" lastName="Stout" imageUrl="http://graph.facebook.com/14400053/picture" character="2" order="0" location="historical" firstPlayer="true" />
+		<player id="28501798" name="Ryan Lucas" firstName="Ryan" lastName="Lucas" imageUrl="http://graph.facebook.com/28501798/picture" character="1" order="1" location="historical" current="true" />
+		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" character="3" order="2" location="historical" current="false" />
 		<player id="28500502" name="Sebastian H. Orr" firstName="Sebastian" lastName="Orr" imageUrl="http://graph.facebook.com/28500502/picture" />
 	</players>
 	<monsters>
-	  <monster id="mon_1_0_0" source="0" trophy="false" location="cup"/>
+	  <monster id="mon_1_0_0" source="0" trophy="false" location="witchhouse"/>
 	  <monster id="mon_1_0_1" source="0" trophy="false" location="cup"/>
 	  <monster id="mon_1_0_2" source="0" trophy="false" location="cup"/>
 	  <monster id="mon_1_0_3" source="0" trophy="false" location="cup"/>
 	  <monster id="mon_1_0_4" source="0" trophy="false" location="cup"/>
 	</monsters>
 	<gates>
-	  <gate id="gate_1_0_0" source="0" trophy="false" location="cup"/>
+	  <gate id="gate_1_0_0" source="0" trophy="false" location="unvisited"/>
 	  <gate id="gate_1_1_0" source="1" trophy="false" location="cup"/>
 	  <gate id="gate_1_2_0" source="2" trophy="false" location="cup"/>
 	</gates>
-	<items>
-	  <item id="item_1_1_0" source="1" inplay="false"/>
-	  <item id="item_1_1_1" source="1" inplay="false"/>
-	  <item id="item_1_2_0" source="2" inplay="false"/>
-	  <item id="item_1_2_1" source="2" inplay="false"/>
-	  <item id="item_1_9_0" source="9" inplay="false"/>
-	  <item id="item_1_9_1" source="9" inplay="false"/>
-	  <item id="item_1_10_0" source="10" inplay="false"/>
-	  <item id="item_1_10_1" source="10" inplay="false"/>
-	  <item id="item_1_11_0" source="11" inplay="false"/>
-	  <item id="item_1_11_1" source="11" inplay="false"/>
-	  <item id="item_1_3_0" source="3" inplay="false"/>
-	  <item id="item_1_3_1" source="3" inplay="false"/>
-	  <item id="item_1_3_2" source="3" inplay="false"/>
-	  <item id="item_1_3_3" source="3" inplay="false"/>
-	  <item id="item_1_4_0" source="4" inplay="false"/>
-	  <item id="item_1_4_1" source="4" inplay="false"/>
-	  <item id="item_1_5_0" source="5" inplay="false"/>
-	  <item id="item_1_12_0" source="12" inplay="false"/>
-	  <item id="item_1_12_1" source="12" inplay="false"/>
-	  <item id="item_1_12_2" source="12" inplay="false"/>
-	  <item id="item_1_12_3" source="12" inplay="false"/>
-	  <item id="item_1_6_0" source="6" inplay="false"/>
-	  <item id="item_1_6_1" source="6" inplay="false"/>
-	  <item id="item_1_6_2" source="6" inplay="false"/>
-	  <item id="item_1_6_3" source="6" inplay="false"/>
-	  <item id="item_1_6_4" source="6" inplay="false"/>
-	  <item id="item_1_7_0" source="7" inplay="false"/>
-	  <item id="item_1_7_1" source="7" inplay="false"/>
-	  <item id="item_1_8_0" source="8" inplay="false"/>
-	  <item id="item_1_8_1" source="8" inplay="false"/>
-	  <item id="item_1_8_2" source="8" inplay="false"/>
-	  <item id="item_1_8_3" source="8" inplay="false"/>
-	</items>
-	<skills>
-	  <skill id="skill_1_1_0" source="1" inplay="false"/>
-	  <skill id="skill_1_1_1" source="1" inplay="false"/>
-	  <skill id="skill_1_2_0" source="2" inplay="false"/>
-	  <skill id="skill_1_2_1" source="2" inplay="false"/>
-	  <skill id="skill_1_3_0" source="3" inplay="false"/>
-	  <skill id="skill_1_3_1" source="3" inplay="false"/>
-	</skills>
+	<cards>
+	  <item id="common_1_1_0" source="1" inplay="false"/>
+	  <item id="common_1_1_1" source="1" inplay="false"/>
+	  <item id="common_1_2_0" source="2" inplay="false"/>
+	  <item id="common_1_2_1" source="2" inplay="false"/>
+	  <item id="common_1_9_0" source="9" inplay="false"/>
+	  <item id="common_1_9_1" source="9" inplay="false"/>
+	  <item id="common_1_10_0" source="10" inplay="false"/>
+	  <item id="common_1_10_1" source="10" inplay="false"/>
+	  <item id="common_1_11_0" source="11" inplay="false"/>
+	  <item id="common_1_11_1" source="11" inplay="false"/>
+	  <item id="unique_1_3_0" source="3" inplay="false"/>
+	  <item id="unique_1_3_1" source="3" inplay="false"/>
+	  <item id="unique_1_3_2" source="3" inplay="false"/>
+	  <item id="unique_1_3_3" source="3" inplay="false"/>
+	  <item id="unique_1_4_0" source="4" inplay="false"/>
+	  <item id="unique_1_4_1" source="4" inplay="false"/>
+	  <item id="unique_1_5_0" source="5" inplay="false"/>
+	  <item id="unique_1_12_0" source="12" inplay="false"/>
+	  <item id="unique_1_12_1" source="12" inplay="false"/>
+	  <item id="unique_1_12_2" source="12" inplay="false"/>
+	  <item id="unique_1_12_3" source="12" inplay="false"/>
+	  <item id="spell_1_6_0" source="6" inplay="false"/>
+	  <item id="spell_1_6_1" source="6" inplay="false"/>
+	  <item id="spell_1_6_2" source="6" inplay="false"/>
+	  <item id="spell_1_6_3" source="6" inplay="false"/>
+	  <item id="spell_1_6_4" source="6" inplay="false"/>
+	  <item id="spell_1_7_0" source="7" inplay="false"/>
+	  <item id="spell_1_7_1" source="7" inplay="false"/>
+	  <item id="spell_1_8_0" source="8" inplay="false"/>
+	  <item id="spell_1_8_1" source="8" inplay="false"/>
+	  <item id="spell_1_8_2" source="8" inplay="false"/>
+	  <item id="spell_1_8_3" source="8" inplay="false"/>
+	  <item id="skill_1_13_0" source="13" inplay="false"/>
+	  <item id="skill_1_13_1" source="13" inplay="false"/>
+	  <item id="skill_1_14_0" source="14" inplay="false"/>
+	  <item id="skill_1_14_1" source="14" inplay="false"/>
+	  <item id="skill_1_15_0" source="15" inplay="false"/>
+	  <item id="skill_1_15_1" source="15" inplay="false"/>
+	  <item id="special_1_16_0" source="16" inplay="false"/>
+	  <item id="special_1_16_1" source="16" inplay="false"/>
+	  <item id="special_1_16_2" source="16" inplay="false"/>
+	  <item id="special_1_16_3" source="16" inplay="false"/>
+	  <item id="special_1_16_4" source="16" inplay="false"/>
+	  <item id="special_1_16_5" source="16" inplay="false"/>
+	  <item id="special_1_16_6" source="16" inplay="false"/>
+	  <item id="special_1_16_7" source="16" inplay="false"/>
+	  <item id="special_1_16_8" source="16" inplay="false"/>
+	  <item id="special_1_16_9" source="16" inplay="false"/>
+	  <item id="special_1_17_0" source="17" inplay="false"/>
+	  <item id="special_1_17_1" source="17" inplay="false"/>
+	  <item id="special_1_17_2" source="17" inplay="false"/>
+	  <item id="special_1_17_3" source="17" inplay="false"/>
+	  <item id="ally_1_18_0" source="18" inplay="false"/>
+	</cards>
 	<locations>
 	  <location id="newspaper" clues="0" closed="false" sealed="false"/>
 	  <location id="train" clues="0" closed="false" sealed="false"/>
@@ -87,6 +100,6 @@
 	  <location id="boardhouse" clues="0" closed="false" sealed="false"/>
 	  <location id="church" clues="0" closed="false" sealed="false"/>
 	  <location id="historical" clues="0" closed="false" sealed="false"/>
-	</locations>	
+	</locations>
 	<logs></logs>
 </game>
