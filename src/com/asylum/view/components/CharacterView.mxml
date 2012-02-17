@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 implements="mx.core.IDataRenderer">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Character;
+			import com.asylum.data.Player;
+
+			private var _data:Object;
+			private var isRendered:Boolean;
+			private var _isEditable:Boolean;
+			private var isPlayer:Boolean;
+			
+			public function get data():Object
+			{
+				return _data;
+			}
+			
+			public function set data(value:Object):void
+			{
+				_data = value;
+				isRendered = false;
+				determineState();
+				invalidateDisplayList();
+			}
+			
+			public function get isEditable():Boolean
+			{
+				return _isEditable;
+			}
+			
+			public function set isEditable(value:Boolean):void
+			{
+				_isEditable = value;
+				if (_data) {
+					isRendered = false;
+					determineState();
+					invalidateDisplayList();
+				}
+			}
+			
+			public function get player():Player {
+				if (_data && (_data is Player)) {
+					return _data as Player;
+				}
+				return null;
+			}
+			
+			public function get character():Character {
+				if (_data && (_data is Player)) {
+					return player.character;
+				} else if (_data && (_data is Character)) {
+					return _data as Character;
+				}
+				return null;
+			}
+			
+			override public function invalidateDisplayList():void {
+				super.invalidateDisplayList();
+				if (!isRendered && data) {
+					if (!isEditable && !isPlayer) {
+						charName.text = character.name;
+						sanityTxt.text = String(character.maxSanity);
+						staminaTxt.text = String(character.maxStamina);
+						focusTxt.text = String(character.focus);
+						startLocTxt.text = character.startLocationName;
+						fixedGearTxt.text = character.fixedGear;
+						randomGearTxt.text = character.randomGear;
+						abilityTitle.text = character.unique.title;
+						abilityTxt.text = character.unique.text;
+						speedView.text = character.speedValues.join(", ");
+						sneakView.text = character.sneakValues.join(", ");
+						fightView.text = character.fightValues.join(", ");
+						willView.text = character.willValues.join(", ");
+						loreView.text = character.loreValues.join(", ");
+						luckView.text = character.luckValues.join(", ");
+					}
+					isRendered = true;
+				}
+			}
+			
+			private function determineState():void {
+				if (_isEditable) {
+					currentState = "edit";
+				} else if (!_isEditable && (_data is Player)) {
+					currentState = "playerview";
+					isPlayer = true;
+				} else {
+					currentState = "view";
+					isPlayer = false;
+				}
+			}
+
+
+			
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="view" />
+		<s:State name="playerview" />
+		<s:State name="edit" />
+	</s:states>
+	<s:VGroup id="viewContainer" includeIn="view,playerview" width="100%" height="100%" top="0" left="0">
+		<s:HGroup id="playerNameContainer" includeIn="playerview" width="100%">
+			<s:BitmapImage id="playerPicture" width="200" />
+			<s:VGroup width="100%" height="100%" maxHeight="{playerPicture.height}">
+				<s:Label id="playerName" text="" width="100%" fontSize="24" fontFamily="Garamond" fontWeight="bold" />
+				<s:HGroup width="100%">
+					<s:Label text="Playing:" fontSize="18" fontFamily="Garamond" fontStyle="italic" />
+					<s:Label id="playerCharName" text="" width="100%" fontSize="18" fontFamily="Garamond" fontWeight="bold" />
+				</s:HGroup>
+			</s:VGroup>
+		</s:HGroup>
+		<s:HGroup id="charNameContainer" includeIn="view" width="100%">
+			<s:Label id="charName" width="100%" fontSize="24" fontFamily="Garamond" fontWeight="bold" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Sanity:" fontSize="16" fontFamily="Garamond" fontWeight="bold" />
+			<s:Label id="sanityTxt" fontSize="16" fontFamily="Garamond" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Stamina:" fontSize="16" fontFamily="Garamond" fontWeight="bold" />
+			<s:Label id="staminaTxt" fontSize="16" fontFamily="Garamond" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:Label text="Focus:" fontSize="14" fontFamily="Garamond" fontWeight="bold" />
+			<s:Label id="focusTxt" fontSize="14" fontFamily="Garamond" />
+		</s:HGroup>
+		<s:HGroup width="100%">
+			<s:VGroup width="50%" paddingRight="10">
+				<s:HGroup includeIn="view" width="100%">
+					<s:Label text="Start Location:" fontSize="14" fontWeight="bold" />
+					<s:Label id="startLocTxt" fontSize="14" />
+				</s:HGroup>
+				<s:VGroup includeIn="view" width="100%">
+					<s:Label text="Fixed Gear:" fontSize="14" fontWeight="bold" />
+					<s:Label id="fixedGearTxt" fontSize="14" />
+				</s:VGroup>
+				<s:VGroup includeIn="view" width="100%">
+					<s:Label text="Random Gear:" fontSize="14" fontWeight="bold" />
+					<s:Label id="randomGearTxt" fontSize="14" />
+				</s:VGroup>
+				<s:VGroup includeIn="playerview" width="100%">
+					<s:Label text="Inventory" width="100%" textAlign="center" fontSize="16" fontWeight="bold" fontFamily="Garamond" />
+					<s:HGroup width="100%">
+						<s:Label text="Cash:" fontSize="14" fontWeight="bold" />
+						<s:Label id="playerCash" fontSize="14" text="" />
+					</s:HGroup>
+					<s:HGroup width="100%">
+						<s:Label text="Clues:" fontSize="14" fontWeight="bold" />
+						<s:Label id="playerClues" fontSize="14" text="" />
+					</s:HGroup>
+					<s:VGroup width="100%">
+						<s:Label id="playerInventory" fontSize="12" text="" />
+					</s:VGroup>
+				</s:VGroup>
+			</s:VGroup>
+			<s:VGroup width="50%">
+				<s:Label id="abilityTitle" width="100%" fontSize="16" fontWeight="bold" fontFamily="Garamond" textAlign="center" />
+				<s:Label id="abilityTxt" width="100%" height="100%" fontSize="14" />
+			</s:VGroup>
+		</s:HGroup>
+		<s:VGroup id="statsViewContainer" width="100%">
+			<s:VGroup width="100%" paddingBottom="10">
+				<s:HGroup width="100%">
+					<s:Label text="Speed:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="speedView" width="100%" fontSize="14" />
+				</s:HGroup>
+				<s:HGroup width="100%">
+					<s:Label text="Sneak:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="sneakView" width="100%" fontSize="14" />
+				</s:HGroup>
+			</s:VGroup>
+			<s:VGroup width="100%" paddingBottom="10">
+				<s:HGroup width="100%">
+					<s:Label text="Fight:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="fightView" width="100%" fontSize="14" />
+				</s:HGroup>
+				<s:HGroup width="100%">
+					<s:Label text="Will:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="willView" width="100%" fontSize="14" />
+				</s:HGroup>
+			</s:VGroup>
+			<s:VGroup width="100%" paddingBottom="10">
+				<s:HGroup width="100%">
+					<s:Label text="Lore:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="loreView" width="100%" fontSize="14" />
+				</s:HGroup>
+				<s:HGroup width="100%">
+					<s:Label text="Luck:" fontSize="14" fontWeight="bold" />
+					<s:RichText id="luckView" width="100%" fontSize="14" />
+				</s:HGroup>
+			</s:VGroup>
+		</s:VGroup>
+	</s:VGroup>
+</s:Group>

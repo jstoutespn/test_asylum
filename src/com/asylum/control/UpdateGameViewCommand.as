@@ -45,9 +45,19 @@ package com.asylum.control
 				sendNotification(NoteName.UPDATE_DOOM_LEVEL, {doom:gameProxy.doomTrack});
 			}
 			
+			var gameStatus:String;
 			if (gameProxy.phase == GamePhase.WAITING_FOR_PLAYERS) {
 				sendNotification(NoteName.UPDATE_GAME_STATUS, "Waiting for Players");
+			} else if (gameProxy.phase == GamePhase.PLAYING) {
+				gameStatus = gameProxy.getCurrentPlayer().firstName + "'s Turn";
+				sendNotification(NoteName.UPDATE_GAME_STATUS, gameStatus);
+			} else if (gameProxy.phase == GamePhase.MYTHOS_PHASE) {
+				sendNotification(NoteName.UPDATE_GAME_STATUS, "Mythos Phase");
+			} else if (gameProxy.phase == GamePhase.BOSS_TURN) {
+				gameStatus = gameProxy.boss.name + "'s Turn";
+				sendNotification(NoteName.UPDATE_GAME_STATUS, gameStatus);
 			}
+			
 			sendNotification(NoteName.UPDATE_PLAY_LIST, {players:gameProxy.players});
 			sendNotification(NoteName.UPDATE_TERROR_LEVEL, {level:gameProxy.terrorTrack});
 			

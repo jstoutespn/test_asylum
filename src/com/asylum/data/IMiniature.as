@@ -6,6 +6,7 @@ package com.asylum.data
 	{
 		function get label():String;
 		function get imageUrl():String;
+		function get extraInfo():Object;
 		function get locationId():String;
 		function set locationId(value:String):void;
 		function get location():ILocation;

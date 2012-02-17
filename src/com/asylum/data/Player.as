@@ -17,6 +17,15 @@ package com.asylum.data
 		public var character:Character;
 		private var _locationId:String;
 		private var _location:ILocation;
+		
+		public var speed:Stat;
+		public var sneak:Stat;
+		public var fight:Stat;
+		public var will:Stat;
+		public var lore:Stat;
+		public var luck:Stat;
+		public var cash:int;
+		public var clues:int;
 		public var inventory:Vector.<CardInstance>;
 		public var trophies:Vector.<ITrophy>;
 		
@@ -28,6 +37,8 @@ package com.asylum.data
 			isFirstPlayer = false;
 			isCurrentTurn = false;
 			_locationId = "";
+			cash = 0;
+			clues = 0;
 			inventory = new Vector.<CardInstance>();
 			trophies = new Vector.<ITrophy>();
 		}
@@ -35,6 +46,11 @@ package com.asylum.data
 		public function get label():String 
 		{
 			return firstName;
+		}
+		
+		public function get extraInfo():Object
+		{
+			return null;
 		}
 		
 		public function get imageUrl():String

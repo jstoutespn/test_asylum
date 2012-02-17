@@ -8,6 +8,7 @@ package com.asylum.data
 		private var _userId:String;
 		private var _accessToken:String;
 		private var _configURL:String;
+		private var _isLocalMode:Boolean;
 		private var _gameURL:String;
 		private var _abominationsURL:String;
 		private var _cardsURL:String;
@@ -35,6 +36,11 @@ package com.asylum.data
 			_userId = parameters['user'];
 			_accessToken = parameters['token'];
 			_configURL = parameters['config'];
+			if (parameters.hasOwnProperty("local") && parameters['local'] == "true") {
+				_isLocalMode = true;
+			} else {
+				_isLocalMode = false;
+			}
 		}
 		
 		public function getConfig(xml:XML):void {
@@ -89,5 +95,11 @@ package com.asylum.data
 		{
 			return _monstersURL;
 		}
+
+		public function get isLocalMode():Boolean
+		{
+			return _isLocalMode;
+		}
+
 	}
 } class SingletonEnforcer {}

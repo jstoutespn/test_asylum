@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:components="com.asylum.view.components.*"
+		 initialize="onInit(event)">
+	<s:states>
+		<s:State name="charSelect" />
+		<s:State name="playing" />
+	</s:states>
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Character;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.collections.Sort;
+			import spark.collections.SortField;
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable] public var charList:ArrayCollection;
+			
+			private function onCharSelectionChange(event:IndexChangeEvent):void
+			{
+				if (charSelection.selectedIndex > 0 && charSelection.selectedItem != null) {
+					charPreview.data = charSelection.selectedItem as Character;
+					previewContainer.visible = true;
+				} else {
+					previewContainer.visible = false;
+				}
+			}
+			
+			private function onSelectChar(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+			
+			private function onInit(event:FlexEvent):void
+			{
+				charList = new ArrayCollection();
+				var charSort:Sort = new Sort();
+				var nameFld:SortField = new SortField("name");
+				charSort.fields = [nameFld];
+			}
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%" top="0" left="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#333333" weight="1" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup id="charSelectContainer" includeIn="charSelect" width="100%" height="100%" paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10">
+		<s:Label text="select character:" fontFamily="Garamond" fontSize="18" fontStyle="italic" />
+		<s:HGroup width="100%">
+			<s:DropDownList id="charSelection" width="100%" dataProvider="{charList}" change="onCharSelectionChange(event)" />
+			<s:Button id="selectCharBtn" label="Select" click="onSelectChar(event)" />
+		</s:HGroup>
+		<s:Scroller id="previewContainer" width="100%" height="100%" verticalScrollPolicy="auto" horizontalScrollPolicy="off" visible="false">
+			<components:CharacterView id="charPreview" width="100%" height="100%" isEditable="false" />
+		</s:Scroller>
+	</s:VGroup>
+</s:Group>

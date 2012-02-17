@@ -37,9 +37,4 @@
 			<s:SolidColor color="#297770" />
 		</s:fill>
 	</s:Rect>
-	<!-- <s:Path  data="M5 0 0 10 10 10 5 0Z" visible="false" includeInLayout="false">
-		<s:fill>
-			<s:SolidColor color="#297770" />
-		</s:fill>
-	</s:Path> -->
 </s:ItemRenderer>

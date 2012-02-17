@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import com.asylum.data.Stat;
+			
+			public static const STAT_CHANGE:String = "statChange";
+			
+			private var _topStat:Stat;
+			private var _bottomStat:Stat;
+			private var _index:int;
+			
+			public function get topStat():Stat
+			{
+				return _topStat;
+			}
+
+			public function set topStat(value:Stat):void
+			{
+				_topStat = value;
+				topLabel.text = _topStat.label;
+				topValue1.text = _topStat.values[0];
+				topValue2.text = _topStat.values[1];
+				topValue3.text = _topStat.values[2];
+				topValue4.text = _topStat.values[3];
+				index = _topStat.index;
+			}
+
+			public function get bottomStat():Stat
+			{
+				return _bottomStat;
+			}
+
+			public function set bottomStat(value:Stat):void
+			{
+				_bottomStat = value;
+				lowerLabel.text = _bottomStat.label;
+				lowerValue1.text = _bottomStat.values[0];
+				lowerValue2.text = _bottomStat.values[1];
+				lowerValue3.text = _bottomStat.values[2];
+				lowerValue4.text = _bottomStat.values[3];
+				index = _bottomStat.index;
+			}
+
+			public function get index():int
+			{
+				return _index;
+			}
+
+			public function set index(value:int):void
+			{
+				_index = value;
+				statSlider.value = _index;
+				if (_topStat) {
+					_topStat.index = _index;
+				}
+				if (_bottomStat) {
+					_bottomStat.index = _index;
+				}
+			}
+
+			private function onSliderChange(event:Event):void
+			{
+				index = statSlider.value;
+				dispatchEvent(new Event(STAT_CHANGE));
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Rect width="100%" height="100%" x="0" y="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#333333" weight="1" />
+		</s:stroke>
+	</s:Rect>
+	<s:VGroup width="100%" height="100%" x="0" y="0" paddingTop="6" paddingRight="6" paddingLeft="6" paddingBottom="6">
+		<s:HGroup id="topContainer" width="100%" paddingBottom="6">
+			<s:Label id="topLabel" width="50" fontFamily="Garamond" fontSize="14" />
+			<s:Group id="topStats" width="100%">
+				<s:Label id="topValue1" top="0" left="0" />
+				<s:Label id="topValue2" top="0" left="{topStats.width*0.33}" />
+				<s:Label id="topValue3" top="0" left="{topStats.width*0.66}" />
+				<s:Label id="topValue4" top="0" right="0" />
+			</s:Group>
+		</s:HGroup>
+		<s:HGroup id="slideContainer" width="100%" paddingLeft="50" paddingBottom="6">
+			<s:HSlider id="statSlider" width="100%" minimum="0" maximum="3" stepSize="1" change="onSliderChange(event)" />
+		</s:HGroup>
+		<s:HGroup id="lowerContainer" width="100%" paddingBottom="6">
+			<s:Label id="lowerLabel" width="50" fontFamily="Garamond" fontSize="14" />
+			<s:Group id="lowerStats" width="100%">
+				<s:Label id="lowerValue1" top="0" left="0" />
+				<s:Label id="lowerValue2" top="0" left="{lowerStats.width*0.33}" />
+				<s:Label id="lowerValue3" top="0" left="{lowerStats.width*0.66}" />
+				<s:Label id="lowerValue4" top="0" right="0" />
+			</s:Group>
+		</s:HGroup>
+	</s:VGroup>
+</s:Group>

@@ -2,6 +2,7 @@ package com.asylum.model
 {
 	import com.asylum.data.AncientOne;
 	import com.asylum.data.CardInstance;
+	import com.asylum.data.Config;
 	import com.asylum.data.GateInstance;
 	import com.asylum.data.LocationState;
 	import com.asylum.data.MonsterInstance;
@@ -59,6 +60,19 @@ package com.asylum.model
 		public function getPlayer(id:String):Player {
 			for each (var player:Player in players) {
 				if (player.id == id) {
+					return player;
+				}
+			}
+			return null;
+		}
+		
+		public function getUser():Player {
+			return getPlayer(Config.i.userId);
+		}
+		
+		public function getCurrentPlayer():Player {
+			for each (var player:Player in players) {
+				if (player.isCurrentTurn) {
 					return player;
 				}
 			}

@@ -7,9 +7,13 @@ package com.asylum.data
 		public var player:Player;
 		public var text:String;
 		public var isChat:Boolean;
+		public var isRendered:Boolean;
 		
 		public function Log()
 		{
+			time = new Date();
+			isChat = false;
+			isRendered = false;
 		}
 	}
 }

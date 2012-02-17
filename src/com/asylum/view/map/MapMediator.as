@@ -43,6 +43,14 @@ package com.asylum.view.map
 			return null;
 		}
 		
+		public function getLocationName(id:String):String {
+			var loc:ILocation = getLocation(id);
+			if (loc != null) {
+				return loc.mapName;
+			}
+			return null;
+		}
+		
 		public function addPlayer(player:IMiniature):void {
 			var loc:ILocation = getLocation(player.locationId);
 			if (loc != null) {

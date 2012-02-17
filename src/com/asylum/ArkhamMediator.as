@@ -5,6 +5,7 @@ package com.asylum
 	import com.asylum.mediator.BaseMediator;
 	import com.asylum.view.ancient.AncientMediator;
 	import com.asylum.view.doom.DoomMediator;
+	import com.asylum.view.log.LogMediator;
 	import com.asylum.view.map.MapMediator;
 	import com.asylum.view.playlist.PlayListMediator;
 	import com.asylum.view.terror.TerrorMediator;
@@ -33,6 +34,7 @@ package com.asylum
 			facade.registerMediator(new TerrorMediator(view.terrorTrack));
 			facade.registerMediator(new DoomMediator(view.doomTrack));
 			facade.registerMediator(new PlayListMediator(view.playList));
+			facade.registerMediator(new LogMediator(view.gameLog));
 		}
 		
 		private function onSetScreen(note:INotification):void {

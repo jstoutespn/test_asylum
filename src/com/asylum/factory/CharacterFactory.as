@@ -11,33 +11,34 @@ package com.asylum.factory
 			char.name = xml.name[0].toString();
 			char.maxSanity = parseFloat(xml..sanity) as int;
 			char.maxStamina = parseFloat(xml..stamina) as int;
+			char.startLocation = xml..startpoint;
 			char.unique.title = xml..unique.name;
 			char.unique.text = xml..unique.description;
 			// speed
 			var speedSteps:String = xml..speed.@steps;
-			char.speed = new Stat( speedSteps.split(",") );
+			char.speedValues = speedSteps.split(",");
 			// sneak
 			var sneakSteps:String = xml..sneak.@steps;
-			char.sneak = new Stat( sneakSteps.split(",") );
+			char.sneakValues = sneakSteps.split(",");
 			// fight
 			var fightSteps:String = xml..fight.@steps;
-			char.fight = new Stat( fightSteps.split(",") );
+			char.fightValues = fightSteps.split(",");
 			// will
 			var willSteps:String = xml..will.@steps;
-			char.will = new Stat( willSteps.split(",") );
+			char.willValues = willSteps.split(",");
 			// lore
 			var loreSteps:String = xml..lore.@steps;
-			char.lore = new Stat( loreSteps.split(",") );
+			char.loreValues = loreSteps.split(",");
 			// luck
 			var luckSteps:String = xml..luck.@steps;
-			char.luck = new Stat( luckSteps.split(",") );
+			char.luckValues = luckSteps.split(",");
 			
 			// gear
 			if (xml..fixed.cash) {
-				char.cash = parseFloat(xml..fixed.cash) as int;
+				char.startCash = parseFloat(xml..fixed.cash) as int;
 			}
 			if (xml..fixed.clue) {
-				char.clues = parseFloat(xml..fixed.clue) as int;
+				char.startClues = parseFloat(xml..fixed.clue) as int;
 			}
 			var cardList:XMLList = xml..fixed.card;
 			if (cardList.length() > 0) {

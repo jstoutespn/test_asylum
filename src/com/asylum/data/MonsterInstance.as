@@ -28,6 +28,11 @@ package com.asylum.data
 			return source.imageUrl;
 		}
 		
+		public function get extraInfo():Object
+		{
+			return {movement:source.movement, awareness:source.awareness, symbol:source.symbol};
+		}
+		
 		public function get locationId():String
 		{
 			return _locationId;

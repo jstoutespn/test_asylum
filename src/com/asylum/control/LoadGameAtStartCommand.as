@@ -53,7 +53,7 @@ package com.asylum.control
 			// do stuff based on game's phase
 			if (gameProxy.phase == GamePhase.GAME_SETUP) {
 				
-			} else if (gameProxy.phase == GamePhase.WAITING_FOR_PLAYERS || gameProxy.phase == GamePhase.PLAYING) {
+			} else {
 				// read game
 				gameProxy.doomTrack = parseFloat(xml.@doom) as int;
 				gameProxy.terrorTrack = parseFloat(xml.@terror) as int;
@@ -126,7 +126,11 @@ package com.asylum.control
 					locState = MapFactory.makeLocationState(locXML);
 					gameProxy.locationStates.push(locState);
 				}
-				// also should read logs here
+				// read logs
+				var logs:XML = xml.logs[0];
+				if (logs.children().length() > 0) {
+					sendNotification(NoteName.UPDATE_LOGS, {xml:logs, renderAll:true});
+				}
 			}
 			sendNotification(NoteName.SET_LOADING_TEXT, "game loaded...");
 			complete(LoadGameAtStartCommand);

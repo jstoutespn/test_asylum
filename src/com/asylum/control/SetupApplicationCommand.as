@@ -27,6 +27,8 @@ package com.asylum.control
 			facade.registerCommand(NoteName.APP_STARTED, FinishApplicationStartupCommand);
 			facade.registerCommand(NoteName.SETUP_GAME, SetupGameCommand);
 			facade.registerCommand(NoteName.UPDATE_GAME_VIEW, UpdateGameViewCommand);
+			facade.registerCommand(NoteName.UPDATE_LOGS, UpdateLogsCommand);
+			facade.registerCommand(NoteName.SEND_CHAT, SendChatCommand);
 			
 			// register startup tasks
 			startupProxy.registerTask(LoadAncientOnesCommand);

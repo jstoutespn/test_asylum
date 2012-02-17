@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <game id="1" phase="waiting" updated="1" boss="3" doom="2" terror="1">
 	<players>
-		<player id="14400053" name="Jon Stout" firstName="Jon" lastName="Stout" imageUrl="http://graph.facebook.com/14400053/picture" character="2" order="0" location="historical" firstPlayer="true" />
-		<player id="28501798" name="Ryan Lucas" firstName="Ryan" lastName="Lucas" imageUrl="http://graph.facebook.com/28501798/picture" character="1" order="1" location="historical" current="true" />
-		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" character="3" order="2" location="historical" current="false" />
-		<player id="28500502" name="Sebastian H. Orr" firstName="Sebastian" lastName="Orr" imageUrl="http://graph.facebook.com/28500502/picture" />
+		<player id="14400053" name="Jon Stout" firstName="Jon" lastName="Stout" imageUrl="http://graph.facebook.com/14400053/picture" character="-1" order="-1" />
+		<player id="28501798" name="Ryan Lucas" firstName="Ryan" lastName="Lucas" imageUrl="http://graph.facebook.com/28501798/picture" character="1" order="0" location="historical" current="true" />
+		<player id="28501566" name="Kari Ewert-Krocker" firstName="Kari" lastName="Ewert-Krocker" imageUrl="http://graph.facebook.com/28501566/picture" />
+		<player id="28500502" name="Sebastian H. Orr" firstName="Sebastian" lastName="Orr" imageUrl="http://graph.facebook.com/28500502/picture" character="3" order="1" location="historical" current="false" />
 	</players>
 	<monsters>
 	  <monster id="mon_1_0_0" source="0" trophy="false" location="witchhouse"/>
@@ -101,5 +101,9 @@
 	  <location id="church" clues="0" closed="false" sealed="false"/>
 	  <location id="historical" clues="0" closed="false" sealed="false"/>
 	</locations>
-	<logs></logs>
+	<logs>
+		<chat id="1_28500502_1" player="28500502" time="20"><![CDATA[Jinx, mothafuckahs!]]></chat>
+		<log id="1_28501798_1" player="28501798" time="20"><![CDATA[chose a character.]]></log>
+		<log id="1_14400053_0" player="14400053" time="15"><![CDATA[started the game.]]></log>
+	</logs>
 </game>
